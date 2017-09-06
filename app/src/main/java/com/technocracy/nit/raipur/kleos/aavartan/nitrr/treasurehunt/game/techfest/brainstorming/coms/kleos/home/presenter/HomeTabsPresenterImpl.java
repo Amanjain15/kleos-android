@@ -1,5 +1,6 @@
 package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.presenter;
 
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Toaster;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.HomeCallBack;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.HomeTabsProvider;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.data.TabsData;
@@ -24,21 +25,23 @@ public class HomeTabsPresenterImpl implements HomeTabsPresenter {
         homeTabsProvider.getTabs(access_token, new HomeCallBack() {
             @Override
             public void onSuccess(TabsData tabsData) {
-                if(tabsData.isSuccess())
-                {
-                    homeView.showLoading(false);
-                    homeView.setTabs(tabsData);
-                }
-                else{
-                    homeView.showLoading(false);
-                    homeView.showMessage(tabsData.getMessage());
+                try {
+                    if (tabsData.isSuccess()) {
+                        homeView.showLoading(false);
+                        homeView.setTabs(tabsData);
+                    } else {
+                        homeView.showLoading(false);
+                        homeView.showMessage(tabsData.getMessage());
+                    }
+                }catch (NullPointerException e){
+                    homeView.showMessage("Success Null in Home Pager");
                 }
             }
 
             @Override
-            public void onFailure() {
-                  homeView.showLoading(false);
-                homeView.showMessage("Unable to connect to server");
+            public void onFailure(String error) {
+                homeView.showLoading(false);
+                homeView.showMessage(error);
             }
         });
     }

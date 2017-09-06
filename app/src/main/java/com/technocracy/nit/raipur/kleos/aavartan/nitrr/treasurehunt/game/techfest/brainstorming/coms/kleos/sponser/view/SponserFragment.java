@@ -86,11 +86,6 @@ public class SponserFragment extends Fragment  implements SponserView{
     @Override
     public void showLoading(boolean show) {
 
-        if(show)
-            sponsprogressBar.setVisibility(true);
-        else
-            sponsprogressBar.setVisibility(false);
-
     }
 
     @Override
