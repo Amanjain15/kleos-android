@@ -1,7 +1,9 @@
 package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper;
 
 import android.content.Context;
+import android.content.Loader;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 /**
  * Created by aman on 30/08/17.
@@ -114,6 +116,7 @@ public class SharedPrefs {
     }
 
     public void setName(String name) {
+        Log.d("SharedPrefs","Name "+name);
         editor.putString(NAME, name);
         editor.commit();
     }

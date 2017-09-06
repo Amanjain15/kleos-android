@@ -15,12 +15,14 @@ import android.widget.TextView;
 
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.Home;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.R;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.forgot_password.view.ForgotActivity;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.SharedPrefs;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Toaster;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.login.model.RetrofitLoginProvider;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.login.model.data.LoginData;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.login.presenter.LoginPresenter;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.login.presenter.LoginPresenterImpl;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sign_up.view.SignUpActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -100,17 +102,17 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
             @Override
             public void onClick(View view) {
                 Toaster.showShortMessage(loginActivity,"Yet to be Made");
-//                Intent i = new Intent(LoginActivity.this, ForgotActivity.class);
-//                startActivity(i);
+                Intent i = new Intent(LoginActivity.this, ForgotActivity.class);
+                startActivity(i);
             }
         });
 
         button_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toaster.showShortMessage(loginActivity,"Yet to be Made");
-//                Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
-//                startActivity(i);
+
+                Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(i);
             }
         });
     }

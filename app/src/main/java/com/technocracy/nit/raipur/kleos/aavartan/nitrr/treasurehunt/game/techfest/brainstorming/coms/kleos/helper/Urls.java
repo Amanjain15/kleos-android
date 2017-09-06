@@ -14,10 +14,11 @@ public class Urls {
 
 	public static final String SUB_NOTIFICATION_IMAGES = "fcm/";
 
-	public static final String REQUEST_COLLEGE = "college_list";
-	public static final String REQUEST_SIGN_UP = "sign_up";
-	public static final String REQUEST_OTP_VERIFY = "verify_otp";
-	public static final String REQUEST_RESEND_OTP = "resend_otp";
+	public static final String REQUEST_COLLEGE = "college_list/";
+	public static final String REQUEST_SIGN_UP = "sign_up/";
+	public static final String REQUEST_OTP_VERIFY = "verify_otp/";
+	public static final String REQUEST_RESEND_OTP = "resend_otp/";
 
-	public static final String UPDATE_DETAILS = "update_details";
+	public static final String UPDATE_DETAILS = "update_details/";
+	public static final String REQUEST_FORGOT_PASSWORD = "forgot_password/";
 }

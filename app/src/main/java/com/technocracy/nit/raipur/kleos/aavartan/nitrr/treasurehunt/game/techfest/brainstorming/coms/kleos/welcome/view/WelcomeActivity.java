@@ -15,6 +15,7 @@ import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfes
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.SharedPrefs;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Toaster;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.login.view.LoginActivity;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sign_up.view.SignUpActivity;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.welcome.models.RetrofitWelcomeProvider;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.welcome.models.data.WelcomeImageDetails;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.welcome.presenter.WelcomePresenter;
@@ -69,9 +70,9 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeView {
             @Override
             public void onClick(View view) {
                 Log.d(WelcomeActivityTag,"SignUp");
-//                Intent i = new Intent(WelcomeActivity.this, SignUpActivity.class);
-//                startActivity(i);
-//                finish();
+                Intent i = new Intent(WelcomeActivity.this, SignUpActivity.class);
+                startActivity(i);
+                finish();
 
             }
         });
@@ -105,7 +106,7 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeView {
 
     @Override
     public void setData(final List<WelcomeImageDetails> welcomeImageDetails) {
-//        sharedPreferences.setFirstTimeLaunch(false);
+        sharedPreferences.setFirstTimeLaunch(false);
         welcomeViewPagerAdapter.setImageList(welcomeImageDetails);
         welcomeViewPagerAdapter.notifyDataSetChanged();
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

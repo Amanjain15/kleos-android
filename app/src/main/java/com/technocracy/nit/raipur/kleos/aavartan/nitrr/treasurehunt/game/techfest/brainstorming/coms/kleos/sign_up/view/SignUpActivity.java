@@ -4,20 +4,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.Home;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.R;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.SharedPrefs;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Toaster;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.login.view.LoginActivity;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sign_up.model.RetrofitSignUpProvider;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sign_up.model.data.OtpData;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sign_up.model.data.SignUpRequestData;
@@ -35,8 +40,10 @@ public class SignUpActivity extends AppCompatActivity implements  SignUpView{
     private String name1, mobile1, password1, college1, email1, confirm_password1;
     private String otp1;
     private String temp_access_token;
-    private SignUpActivity signUpActivity;
+    private static SignUpActivity signUpActivity;
 
+    @BindView(R.id.sign_up_logo)
+    ImageView sign_up_logo;
 
     @BindView(R.id.detailsLayout)
     LinearLayout detailsLayout;
@@ -89,18 +96,38 @@ public class SignUpActivity extends AppCompatActivity implements  SignUpView{
     @BindView(R.id.submit)
     Button submit;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         signUpActivity=this;
         ButterKnife.bind(signUpActivity);
+        Glide.with(signUpActivity).load(R.drawable.ic_logo).into(sign_up_logo);
         otp_layout.setVisibility(View.GONE);
         updateDetailsLayout.setVisibility(View.GONE);
         detailsLayout.setVisibility(View.VISIBLE);
+
         initialise();
+
+        mobile.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (mobile.getText().toString().length() == 10) {
+//                    hideKeyboard();
+                    email.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,14 +160,23 @@ public class SignUpActivity extends AppCompatActivity implements  SignUpView{
         resend_otp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resend_otp.setVisibility(View.INVISIBLE);
+                resend_otp.setBackgroundColor(getResources().getColor(R.color.blueGreen));
                 signUpPresenter.resendOtp(temp_access_token);
+            }
+        });
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(SignUpActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
 
     private void initialise() {
-        sharedPrefs = new SharedPrefs(this);
+        sharedPrefs = new SharedPrefs(signUpActivity);
         signUpPresenter = new SignUpPresenterImpl(this,new RetrofitSignUpProvider());
     }
 
@@ -195,7 +231,7 @@ public class SignUpActivity extends AppCompatActivity implements  SignUpView{
         otp_layout.setVisibility(View.GONE);
         detailsLayout.setVisibility(View.GONE);
         updateDetailsLayout.setVisibility(View.VISIBLE);
-        update_name.setText(sharedPrefs.getName());
+        update_name.setText(signUpRequestData.getName());
 
         ArrayAdapter<String> collegeAdapter = new ArrayAdapter<String>
                 (signUpActivity, android.R.layout.simple_list_item_1,
@@ -229,20 +265,18 @@ public class SignUpActivity extends AppCompatActivity implements  SignUpView{
                 }
             }
         });
-
-
     }
 
     @Override
     public void onDetailsUpdate(UpdateDetailsData updateDetailsData) {
+        sharedPrefs.setLoggedIn(true);
         Intent intent= new Intent(SignUpActivity.this, Home.class);
         startActivity(intent);
         finish();
     }
 
 
-    //Button Handlers
-
+    //  Button Handlers
 
     @Override
     public void enable_signUp(boolean show) {
@@ -261,6 +295,7 @@ public class SignUpActivity extends AppCompatActivity implements  SignUpView{
             verify.setEnabled(false);
         }
     }
+
     @Override
     public void enable_update(boolean show) {
         if (show) {

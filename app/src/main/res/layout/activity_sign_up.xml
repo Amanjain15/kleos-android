@@ -15,7 +15,7 @@
             android:id="@+id/imageLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_big"
-            android:layout_marginTop="@dimen/margin_very_small">
+            android:layout_marginTop="@dimen/margin_medium">
 
             <ImageView
                 android:id="@+id/sign_up_logo"
@@ -70,8 +70,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
                         android:paddingBottom="@dimen/padding_large"
-                        android:textColorHint="@color/black"
-
                         >
 
                         <EditText
@@ -110,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
                         android:paddingBottom="@dimen/padding_large"
-                        android:textColorHint="@color/black"
+
 
                         >
 
@@ -141,15 +139,13 @@
                         android:layout_weight="1.7"
                         android:contentDescription="icon_mobile"
                         android:paddingTop="@dimen/padding_large"
-                        android:src="@drawable/ic_phone_accent_24dp" />
+                        android:src="@drawable/ic_email_accent_24dp" />
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
                         android:paddingBottom="@dimen/padding_large"
-                        android:textColorHint="@color/black"
-
                         >
 
                         <EditText
@@ -183,11 +179,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/margin_very_small"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:gravity="center"
                     android:text="@string/already_have_a_account"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/textSizeSmall" />
+                    android:textColor="@color/black_80_percent"
+                    android:textSize="@dimen/textSizeSmall"
+
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -242,7 +240,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.3"
                                 android:paddingBottom="@dimen/padding_large"
-                                android:textColorHint="@color/black"
 
                                 >
 
@@ -315,8 +312,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
                         android:paddingBottom="@dimen/padding_large"
-                        android:textColorHint="@color/black"
-
                         >
 
                         <EditText
@@ -355,7 +350,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
                         android:paddingBottom="@dimen/padding_large"
-                        android:textColorHint="@color/black"
 
                         >
 
@@ -393,7 +387,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
                         android:paddingBottom="@dimen/padding_large"
-                        android:textColorHint="@color/black"
 
                         >
 
@@ -432,8 +425,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
                         android:paddingBottom="@dimen/padding_large"
-                        android:textColorHint="@color/black"
-
                         >
 
                         <EditText

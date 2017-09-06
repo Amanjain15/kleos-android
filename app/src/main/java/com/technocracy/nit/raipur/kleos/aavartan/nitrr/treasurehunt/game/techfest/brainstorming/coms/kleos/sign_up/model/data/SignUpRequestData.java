@@ -12,15 +12,15 @@ public class SignUpRequestData {
     private String message;
     private String access_token;
     private String name;
-    private String[] collegeDetailsList;
+    private String[] college_list;
 
     public SignUpRequestData(boolean success, String message, String access_token, String name,
-                             String[] collegeDetailsList) {
+                             String[] college_list) {
         this.success = success;
         this.message = message;
         this.access_token = access_token;
         this.name = name;
-        this.collegeDetailsList = collegeDetailsList;
+        this.college_list = college_list;
 
     }
 
@@ -41,7 +41,7 @@ public class SignUpRequestData {
     }
 
     public String[] getCollegeDetailsList() {
-        return collegeDetailsList;
+        return college_list;
     }
 }
 
