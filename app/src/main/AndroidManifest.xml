@@ -33,7 +33,8 @@
             android:value="57ed6f1ad278e9d2f7122d87b68d4f811bac6338" />
 
         <activity android:name=".welcome.view.WelcomeActivity" />
-        <activity android:name=".login.view.LoginActivity"></activity>
+        <activity android:name=".login.view.LoginActivity" />
+        <activity android:name=".sign_up.view.SignUpActivity"></activity>
     </application>
 
 </manifest>
