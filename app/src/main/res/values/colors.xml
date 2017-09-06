@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#2f0202</color>
+    <color name="colorPrimaryDark">#270202</color>
+    <color name="colorAccent">#0c7489</color>
+
+    <color name="blueGreen">#119da4</color>
+    <color name="bone">#e3d3bd</color>
+    <color name="gainsboro">#d1e1e8</color>
+
+
+    <!--Black color shades-->
+    <color name="black_100_percent">#ff000000</color>
+    <color name="black_90_percent">#e6000000</color>
+    <color name="black_80_percent">#cc000000</color>
+    <color name="black_60_percent">#99000000</color>
+    <color name="black_40_percent">#66000000</color>
+    <color name="black_20_percent">#33000000</color>
+    <color name="black_10_percent">#19000000</color>
+    <color name="black_02_percent">#05000000</color>
+    <color name="black_03_percent">#09000000</color>
+    <color name="black_05_percent">#10000000</color>
+    <color name="black_87_percent">#dd000000</color>
+    <color name="black_percent">#89000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+
 </resources>
