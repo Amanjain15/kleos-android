@@ -36,11 +36,11 @@ public class Keys {
     public static final int FRAGMENT_TYPE_GAME = 4;
     public static final int FRAGMENT_TYPE_BONUS = 5;
 
-    public static final int TAB_PROFILE_ICON = R.drawable.ic_action_name;
-    public static final int TAB_STORYLINE_ICON = R.drawable.ic_action_name;
-    public static final int TAB_SPONSOR_ICON = R.drawable.ic_action_name;
-    public static final int TAB_ABOUT_US_ICON = R.drawable.ic_action_name;
-    public static final int TAB_GAME_ICON = R.drawable.ic_action_name;
-    public static final int TAB_BONUS_ICON = R.drawable.ic_action_name;
+    public static final int TAB_PROFILE_ICON = R.drawable.ic_tab_profile;
+    public static final int TAB_STORYLINE_ICON = R.drawable.ic_tab_story;
+    public static final int TAB_SPONSOR_ICON = R.drawable.ic_tab_sponsor;
+    public static final int TAB_ABOUT_US_ICON = R.drawable.ic_tab_about_us;
+    public static final int TAB_GAME_ICON = R.drawable.ic_tab_game;
+    public static final int TAB_BONUS_ICON = R.drawable.ic_tab_bonus;
 
 }

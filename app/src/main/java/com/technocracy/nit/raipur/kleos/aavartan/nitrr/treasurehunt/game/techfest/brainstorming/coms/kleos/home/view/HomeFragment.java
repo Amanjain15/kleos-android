@@ -43,12 +43,11 @@ import butterknife.ButterKnife;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment implements HomeView {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+
     private String mParam1;
     private String mParam2;
 
@@ -118,8 +117,8 @@ public class HomeFragment extends Fragment implements HomeView {
 
     private void initialize() {
         sharedPrefs = new SharedPrefs(context);
-//        homeTabsPresenter = new HomeTabsPresenterImpl(new RetrofitHomeTabsProvider(),this);
-        homeTabsPresenter = new HomeTabsPresenterImpl(new MockHomeProvider(),this);
+        homeTabsPresenter = new HomeTabsPresenterImpl(new RetrofitHomeTabsProvider(),this);
+//        homeTabsPresenter = new HomeTabsPresenterImpl(new MockHomeProvider(),this);
         viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -142,79 +141,89 @@ public class HomeFragment extends Fragment implements HomeView {
         GameFragment gameFragment= new GameFragment();
         BonusFragment bonusFragment= new BonusFragment();
         TabDetails tabDetails;
-
+        toolbar.setTitle("Kleos");
         try {
             for (int i = 0; i < tabsData.getTab_list().size(); i++) {
                 tabDetails = tabsData.getTab_list().get(i);
-                switch (tabsData.getTab_list().get(i).getId()) {
+                Log.d("HomeTab",""+tabDetails.getId());
+                switch (tabDetails.getId()) {
 
                     case Keys.FRAGMENT_TYPE_PROFILE:
-                        viewPagerAdapter.addFragment(profileFragment, tabDetails.getTitle(),
-                                tabDetails.getPosition());
+                        viewPagerAdapter.addFragment(profileFragment, tabDetails.getTitle());
                         viewPagerAdapter.notifyDataSetChanged();
-                        if (tabLayout.getTabAt(tabDetails.getPosition()) != null) {
+                        break;
+                    case Keys.FRAGMENT_TYPE_STORYLINE:
+                        viewPagerAdapter.addFragment(storylineFragment, tabDetails.getTitle());
+                        viewPagerAdapter.notifyDataSetChanged();
+                        break;
+                    case Keys.FRAGMENT_TYPE_SPONSOR:
+                        viewPagerAdapter.addFragment(sponserFragment, tabDetails.getTitle());
+                        viewPagerAdapter.notifyDataSetChanged();
+                        break;
+                    case Keys.FRAGMENT_TYPE_ABOUT_US:
+                        viewPagerAdapter.addFragment(aboutUsFragment, tabDetails.getTitle());
+                        viewPagerAdapter.notifyDataSetChanged();
+                        break;
+                    case Keys.FRAGMENT_TYPE_GAME:
+                        viewPagerAdapter.addFragment(gameFragment, tabDetails.getTitle());
+                        viewPagerAdapter.notifyDataSetChanged();
+                        break;
+                    case Keys.FRAGMENT_TYPE_BONUS:
+                        viewPagerAdapter.addFragment(bonusFragment, tabDetails.getTitle());
+                        viewPagerAdapter.notifyDataSetChanged();
+                        break;
+                }
+                viewPagerAdapter.notifyDataSetChanged();
+            }
+            for (int i = 0; i < tabsData.getTab_list().size(); i++) {
+                tabDetails = tabsData.getTab_list().get(i);
+                Log.d("HomeTab",""+tabDetails.getId());
+                switch (tabDetails.getId()) {
+
+                    case Keys.FRAGMENT_TYPE_PROFILE:
+                        if (tabLayout.getTabAt(i) != null) {
                             tabLayout.getTabAt(i).setIcon(Keys.TAB_PROFILE_ICON);
                         }
                         break;
                     case Keys.FRAGMENT_TYPE_STORYLINE:
-                        viewPagerAdapter.addFragment(storylineFragment, tabDetails.getTitle(),
-                                tabDetails.getPosition());
-                        viewPagerAdapter.notifyDataSetChanged();
-                        if (tabLayout.getTabAt(tabDetails.getPosition()) != null) {
+                        if (tabLayout.getTabAt(i) != null) {
                             tabLayout.getTabAt(i).setIcon(Keys.TAB_STORYLINE_ICON);
                         }
                         break;
                     case Keys.FRAGMENT_TYPE_SPONSOR:
-                        viewPagerAdapter.addFragment(sponserFragment, tabDetails.getTitle(),
-                                tabDetails.getPosition());
-                        viewPagerAdapter.notifyDataSetChanged();
-                        if (tabLayout.getTabAt(tabDetails.getPosition()) != null) {
+                        if (tabLayout.getTabAt(i) != null) {
                             tabLayout.getTabAt(i).setIcon(Keys.TAB_SPONSOR_ICON);
                         }
                         break;
                     case Keys.FRAGMENT_TYPE_ABOUT_US:
-                        viewPagerAdapter.addFragment(aboutUsFragment, tabDetails.getTitle(),
-                                tabDetails.getPosition());
-                        viewPagerAdapter.notifyDataSetChanged();
-                        if (tabLayout.getTabAt(tabDetails.getPosition()) != null) {
+                        if (tabLayout.getTabAt(i) != null) {
                             tabLayout.getTabAt(i).setIcon(Keys.TAB_ABOUT_US_ICON);
                         }
                         break;
                     case Keys.FRAGMENT_TYPE_GAME:
-                        viewPagerAdapter.addFragment(gameFragment, tabDetails.getTitle(),
-                                tabDetails.getPosition());
-                        viewPagerAdapter.notifyDataSetChanged();
-                        if (tabLayout.getTabAt(tabDetails.getPosition()) != null) {
+                        if (tabLayout.getTabAt(i) != null) {
                             tabLayout.getTabAt(i).setIcon(Keys.TAB_GAME_ICON);
                         }
                         break;
                     case Keys.FRAGMENT_TYPE_BONUS:
-                        viewPagerAdapter.addFragment(bonusFragment, tabDetails.getTitle(),
-                                tabDetails.getPosition());
-                        viewPagerAdapter.notifyDataSetChanged();
-                        if (tabLayout.getTabAt(tabDetails.getPosition()) != null) {
+                        if (tabLayout.getTabAt(i) != null) {
                             tabLayout.getTabAt(i).setIcon(Keys.TAB_BONUS_ICON);
                         }
                         break;
                 }
-                viewPagerAdapter.notifyDataSetChanged();
-
             }
 
         }catch (NullPointerException e){
             Toaster.showShortMessage(context,"Null Pointer in ViewPager Set Data");
         }
+        viewPager.setOffscreenPageLimit(tabsData.getTab_list().size());
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 TabDetails tabDetails;
-                for (int i = 0; i < tabsData.getTab_list().size(); i++) {
-                    tabDetails = tabsData.getTab_list().get(i);
-                    if (position == tabDetails.getPosition()) {
-                        toolbar.setTitle(tabDetails.getTitle());
-                    }
-                }
+                tabDetails = tabsData.getTab_list().get(position);
+                toolbar.setTitle(tabDetails.getTitle());
             }
 
             @Override
@@ -244,9 +253,6 @@ public class HomeFragment extends Fragment implements HomeView {
         Toaster.showShortMessage(context,message);
     }
 
-
-
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -258,16 +264,6 @@ public class HomeFragment extends Fragment implements HomeView {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

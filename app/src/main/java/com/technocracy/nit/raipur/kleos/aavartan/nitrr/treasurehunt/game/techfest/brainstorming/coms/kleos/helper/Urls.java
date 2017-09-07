@@ -21,6 +21,6 @@ public class Urls {
 
 	public static final String UPDATE_DETAILS = "update_details/";
 	public static final String REQUEST_FORGOT_PASSWORD = "forgot_password/";
-	public static final String REQUEST_HOME_TABS = "home_tabs";
+	public static final String REQUEST_HOME_TABS = "tab_list/";
 	public static final String REQUEST_SPONSER = "sponsor/";
 }

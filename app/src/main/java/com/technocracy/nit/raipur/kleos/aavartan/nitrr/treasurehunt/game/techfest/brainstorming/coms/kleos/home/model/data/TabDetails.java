@@ -7,12 +7,11 @@ package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfe
 public class TabDetails {
 
     private String title;
-    private int position;
     private int id;
 
-    public TabDetails(String title, int position, int id) {
+    public TabDetails(String title,  int id) {
         this.title = title;
-        this.position = position;
+
         this.id = id;
     }
 
@@ -22,10 +21,6 @@ public class TabDetails {
 
     public String getTitle() {
         return title;
-    }
-
-    public int getPosition() {
-        return position;
     }
 
 

@@ -28,11 +28,19 @@ public class MockHomeProvider implements HomeTabsProvider {
 
     public TabsData getMockTabData() {
         List<TabDetails> tabDetailses = new ArrayList<>();
-
-        for (int i =0,j=5 ;i < 6 && j>=0;i++,j--){
-            TabDetails tabDetails = new TabDetails("TabId " + j,i,j);
-            tabDetailses.add(tabDetails);
-        }
+        TabDetails tabDetails;
+        tabDetails = new TabDetails("PROFILE",0);
+        tabDetailses.add(tabDetails);
+        tabDetails = new TabDetails("ABOUT_US",3);
+        tabDetailses.add(tabDetails);
+        tabDetails = new TabDetails("SPONSOR",1);
+        tabDetailses.add(tabDetails);
+        tabDetails = new TabDetails("STORYLINE",2);
+        tabDetailses.add(tabDetails);
+        tabDetails = new TabDetails("BONUS",5);
+        tabDetailses.add(tabDetails);
+        tabDetails = new TabDetails("GAME",4);
+        tabDetailses.add(tabDetails);
         return new TabsData(true,"Successful",tabDetailses);
     }
 }
