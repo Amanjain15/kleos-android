@@ -1,14 +1,30 @@
 package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.storyline.view;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.R;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.SharedPrefs;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Toaster;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.image_loader.GlideImageLoader;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.image_loader.ImageLoader;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.storyline.model.RetrofitStoryProvider;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.storyline.model.data.StoryLineData;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.storyline.presenter.StoryLinePresenter;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.storyline.presenter.StoryPresenterImpl;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +34,7 @@ import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfes
  * Use the {@link StorylineFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StorylineFragment extends Fragment {
+public class StorylineFragment extends Fragment implements  StoryLineView{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,6 +43,22 @@ public class StorylineFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Context context;
+    private SharedPrefs sharedPreferences;
+    private StoryLinePresenter storyLinePresenter;
+    private ImageLoader imageLoader;
+
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
+    @BindView(R.id.story_textview)
+    TextView story_textview;
+
+    @BindView(R.id.imageView)
+    ImageView imageView;
+    @BindView(R.id.imageProgressBar)
+    ProgressBar imageProgressBar;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +97,18 @@ public class StorylineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_storyline, container, false);
+        View view= inflater.inflate(R.layout.fragment_storyline, container, false);
+        ButterKnife.bind(this,view);
+        context=getContext();
+        initialize();
+        storyLinePresenter.requestStory(sharedPreferences.getAccessToken());
+        return  view;
+    }
+
+    private void initialize() {
+        sharedPreferences = new SharedPrefs(context);
+        storyLinePresenter= new StoryPresenterImpl(this,new RetrofitStoryProvider());
+        imageLoader = new GlideImageLoader(context);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -87,16 +130,29 @@ public class StorylineFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    @Override
+    public void setData(StoryLineData storyLineData) {
+        if (!(storyLineData.getImage_url().equals("") || storyLineData.getImage_url().equals(null)))
+        {
+            imageLoader.loadImage(storyLineData.getImage_url(),imageView,imageProgressBar);
+        }
+        story_textview.setText(Html.fromHtml(storyLineData.getStory()));
+    }
+
+    @Override
+    public void showLoading(boolean show) {
+        if (show) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toaster.showShortMessage(context,message);
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

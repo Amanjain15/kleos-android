@@ -216,7 +216,7 @@ public class HomeFragment extends Fragment implements HomeView {
         }catch (NullPointerException e){
             Toaster.showShortMessage(context,"Null Pointer in ViewPager Set Data");
         }
-        viewPager.setOffscreenPageLimit(tabsData.getTab_list().size());
+        viewPager.setOffscreenPageLimit(tabsData.getTab_list().size()-1);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

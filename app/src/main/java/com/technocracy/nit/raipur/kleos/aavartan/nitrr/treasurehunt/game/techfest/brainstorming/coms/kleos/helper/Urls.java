@@ -23,4 +23,6 @@ public class Urls {
 	public static final String REQUEST_FORGOT_PASSWORD = "forgot_password/";
 	public static final String REQUEST_HOME_TABS = "tab_list/";
 	public static final String REQUEST_SPONSER = "sponsor/";
+	public static final String REQUEST_PROFILE = "profile/";
+	public static final String REQUEST_STORY = "story/";
 }

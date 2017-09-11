@@ -21,5 +21,8 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="proceed">Proceed</string>
     <string name="new_password">New Password</string>
+    <string name="hint_name">Name</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
 
 </resources>
