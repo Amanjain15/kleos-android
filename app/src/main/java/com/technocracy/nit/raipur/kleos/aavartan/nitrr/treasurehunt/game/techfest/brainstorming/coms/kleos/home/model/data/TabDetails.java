@@ -8,10 +8,15 @@ public class TabDetails {
 
     String title;
     int position;
+    int value;
     String image_url;
 
     public String getTitle() {
         return title;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     public void setTitle(String title) {
@@ -34,10 +39,10 @@ public class TabDetails {
         this.image_url = image_url;
     }
 
-    public TabDetails(String title, int position, String image_url) {
-
+    public TabDetails(String title, int position, int value, String image_url) {
         this.title = title;
         this.position = position;
+        this.value = value;
         this.image_url = image_url;
     }
 }

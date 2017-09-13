@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">kleos</string>
+<<<<<<< HEAD
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+=======
+    <string name="login">LOGIN</string>
+    <string name="sign_up">SIGN-UP</string>
+    <string name="mobile">Mobile</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password</string>
+>>>>>>> 6318cf2c16feb0cb7169b568cf39f8241ffb3594
 </resources>

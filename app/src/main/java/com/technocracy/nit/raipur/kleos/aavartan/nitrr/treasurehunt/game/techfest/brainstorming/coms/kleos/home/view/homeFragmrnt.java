@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -14,14 +15,20 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.R;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.SharedPrefs;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.RetrofitHomeTabsProvider;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.data.TabDetails;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.data.TabsData;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.presenter.HomeTabsPresenter;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.presenter.HomeTabsPresenterImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.R.id.list;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,6 +65,7 @@ public class homeFragmrnt extends Fragment implements HomeView {
     private ViewPagerAdapter viewPagerAdapter;
     private HomeTabsPresenter homeTabsPresenter;
     private LayoutInflater layoutInflater;
+
 
 
     private OnFragmentInteractionListener mListener;
@@ -99,6 +107,22 @@ public class homeFragmrnt extends Fragment implements HomeView {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_home_fragmrnt, container, false);
         ButterKnife.bind(this,view);
+
+        homeTabsPresenter = new HomeTabsPresenterImpl(new RetrofitHomeTabsProvider(),this);
+        layoutInflater=LayoutInflater.from(getContext());
+        toolbar.setTitleTextColor(ContextCompat.getColor(getContext(), R.color.white));
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_arrow_back_white_24dp));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
+
+
+        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+        viewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     return view;
     }
 
@@ -112,6 +136,38 @@ public class homeFragmrnt extends Fragment implements HomeView {
 
     @Override
     public void setTabs(TabsData tabsData) {
+         List<TabDetails>tabsDetailsList=new ArrayList<>();
+        tabsDetailsList = tabsData.getTabsDetailsList();
+        List<Fragment> fragmentList = new ArrayList<>();
+        List<String> titleImageList = new ArrayList<>();
+        List<String> titleNameList = new ArrayList<>();
+        for (int i = 0; i <tabsDetailsList.size() ; i++) {
+            for (int j = 0; j < tabsDetailsList.size(); j++) {
+                if (tabsDetailsList.get(j).getPosition() == i) {
+                    int value = tabsDetailsList.get(j).getValue();
+                    if (value ==) {
+                        ProductsListFragment fragment = ProductsListFragment.newInstance(subCategoryDetailsList.get(i).getId(), 0);
+                        fragmentList.add(fragment);
+                        titleImageList.add(tabsDetailsList.get(j).getImage_url());
+                        titleNameList.add(tabsDetailsList.get(j).getTitle());
+
+                    }
+                    else if(value==)
+                    {
+                        ProductsListFragment fragment = ProductsListFragment.newInstance(subCategoryDetailsList.get(i).getId(), 0);
+                        fragmentList.add(fragment);
+                        titleList.add(tabsDetailsList.get(i).getImage_url());
+
+                    }
+                }
+
+            }
+        }
+
+        viewPagerAdapter.setTabData(fragmentList, titleList);
+      //  viewPager.setCurrentItem(subcategory_position);
+        viewPagerAdapter.notifyDataSetChanged();
+
 
 
     }
