@@ -1,9 +1,11 @@
 package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.R;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.model.data.SponserData;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.model.data.SponserDetails;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,7 +22,14 @@ import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfes
  * to handle interaction events.
  * Use the {@link SponserFragment#newInstance} factory method to
  * create an instance of this fragment.
+ *
  */
+
+
+
+
+
+
 public class SponserFragment extends Fragment  implements SponserView{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -67,7 +77,10 @@ public class SponserFragment extends Fragment  implements SponserView{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sponser, container, false);
+        View view =inflater.inflate(R.layout.fragment_sponser, container, false);
+
+
+        return view ;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -87,8 +100,20 @@ public class SponserFragment extends Fragment  implements SponserView{
     public void showLoading(boolean show) {
 
     }
+    public void onImageClick(SponserDetails sponserDetails)
+    {
+        Uri uri = Uri.parse(sponserDetails.getWeb_url());
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+        builder.setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
+// set start and exit animations
+        builder.setExitAnimations(getActivity(), android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right);
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        customTabsIntent.launchUrl(getActivity(), uri);
 
-    @Override
+    }
     public void showMessage(String message) {
         Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
     }
