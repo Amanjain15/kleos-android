@@ -28,6 +28,7 @@ import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfes
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.presenter.HomeTabsPresenter;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.presenter.HomeTabsPresenterImpl;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.profile.view.ProfileFragment;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.view.QuestionFragment;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.view.SponserFragment;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.storyline.view.StorylineFragment;
 
@@ -140,6 +141,7 @@ public class HomeFragment extends Fragment implements HomeView {
         AboutUsFragment aboutUsFragment= new AboutUsFragment();
         GameFragment gameFragment= new GameFragment();
         BonusFragment bonusFragment= new BonusFragment();
+        QuestionFragment questionFragment=new QuestionFragment();
         TabDetails tabDetails;
         toolbar.setTitle("Kleos");
         try {
@@ -170,6 +172,10 @@ public class HomeFragment extends Fragment implements HomeView {
                         break;
                     case Keys.FRAGMENT_TYPE_BONUS:
                         viewPagerAdapter.addFragment(bonusFragment, tabDetails.getTitle());
+                        viewPagerAdapter.notifyDataSetChanged();
+                        break;
+                    case Keys.FRAGMENT_TYPE_QUESTIONS:
+                        viewPagerAdapter.addFragment(questionFragment, tabDetails.getTitle());
                         viewPagerAdapter.notifyDataSetChanged();
                         break;
                 }
@@ -208,6 +214,11 @@ public class HomeFragment extends Fragment implements HomeView {
                     case Keys.FRAGMENT_TYPE_BONUS:
                         if (tabLayout.getTabAt(i) != null) {
                             tabLayout.getTabAt(i).setIcon(Keys.TAB_BONUS_ICON);
+                        }
+                        break;
+                    case Keys.FRAGMENT_TYPE_QUESTIONS:
+                        if (tabLayout.getTabAt(i) != null) {
+                            tabLayout.getTabAt(i).setIcon(Keys.TAB_QUESTION_ICON);
                         }
                         break;
                 }

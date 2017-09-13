@@ -24,12 +24,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_small"
+                android:background="@drawable/two_end_curved_layout"
                 >
                 <TextView
                     android:id="@+id/question_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_size_medium"
+                    android:textColor="@color/white"
                     />
             </LinearLayout>
 
@@ -38,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/question_name_layout"
                 android:padding="@dimen/padding_small"
+                android:background="@drawable/bluegreen_bordered_layout"
                 >
                 <TextView
                     android:id="@+id/question_content"
@@ -46,6 +49,7 @@
                     android:textSize="@dimen/textSizeSmall"
                     android:maxLines="3"
                     android:ellipsize="end"
+
                     />
             </LinearLayout>
 
@@ -62,6 +66,7 @@
             android:textSize="@dimen/text_size_medium"
             android:text="@string/solved_questions"
             android:textColor="@color/white"
+            android:visibility="gone"
             />
 
         <RelativeLayout
@@ -71,6 +76,7 @@
             android:orientation="vertical"
             android:layout_below="@+id/solved_heading"
             android:padding="@dimen/padding_medium"
+            android:visibility="gone"
             >
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/question_recycler"
