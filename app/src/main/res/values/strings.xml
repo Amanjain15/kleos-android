@@ -24,5 +24,6 @@
     <string name="hint_name">Name</string>
     <string name="edit">Edit</string>
     <string name="save">Save</string>
+    <string name="solved_questions">Solved Questions</string>
 
 </resources>

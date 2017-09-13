@@ -43,6 +43,7 @@ public class ProfileRequestPresenterImpl implements ProfileRequestPresenter {
 
                     e.printStackTrace();
                     profileRequestView.showMessage("Success Null in Profile");
+                    profileRequestView.showLoading(false);
                 }
             }
 
