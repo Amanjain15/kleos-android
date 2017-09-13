@@ -1,5 +1,6 @@
 package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model;
 
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Urls;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.HomeCallBack;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.api.HomeTabsApi;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.data.TabsData;
@@ -18,7 +19,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitHomeTabsProvider implements HomeTabsProvider {
     private HomeTabsApi homeTabsApi;
-    Retrofit retrofit;
+    private Call<TabsData> tabsDataCall;
+    private Retrofit retrofit;
 
     public RetrofitHomeTabsProvider() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -32,25 +34,25 @@ public class RetrofitHomeTabsProvider implements HomeTabsProvider {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
-
-
         homeTabsApi = retrofit.create(HomeTabsApi.class);
-
-
     }
 
     @Override
     public void getTabs(String access_token, final HomeCallBack homeCallBack) {
-        Call<TabsData>call=homeTabsApi.requestTabs(access_token);
-        call.enqueue(new Callback<TabsData>() {
+        tabsDataCall=homeTabsApi.requestTabs(access_token);
+        tabsDataCall.enqueue(new Callback<TabsData>() {
             @Override
             public void onResponse(Call<TabsData> call, Response<TabsData> response) {
-                homeCallBack.onSuccess(response.body());
+                try {
+                    homeCallBack.onSuccess(response.body());
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void onFailure(Call<TabsData> call, Throwable t) {
-                         homeCallBack.onFailure();
+                homeCallBack.onFailure("No Internet Connection");
                 t.printStackTrace();
             }
         });

@@ -59,6 +59,7 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
     }
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:recyclerview-v7:25.3.1'
@@ -80,6 +81,9 @@ dependencies {
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     apt 'com.jakewharton:butterknife-compiler:8.5.1'
+<<<<<<< HEAD
 
+=======
+>>>>>>> e4301a092cde0713e9388c22188b231657edf1a8
 }
 apply plugin: 'com.google.gms.google-services'

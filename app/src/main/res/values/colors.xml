@@ -8,6 +8,9 @@
     <color name="bone">#e3d3bd</color>
     <color name="gainsboro">#d1e1e8</color>
 
+    <!--Profile-->
+    <color name ="profileImageBackground">#e3d3bd</color>
+    <color name ="profileDetailsBackground">#d1e1e8</color>
 
     <!--Black color shades-->
     <color name="black_100_percent">#ff000000</color>
@@ -24,6 +27,5 @@
     <color name="black_percent">#89000000</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-
 
 </resources>

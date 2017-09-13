@@ -1,20 +1,21 @@
-package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.view;
+package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.view;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+<<<<<<< HEAD:app/src/main/java/com/technocracy/nit/raipur/kleos/aavartan/nitrr/treasurehunt/game/techfest/brainstorming/coms/kleos/home/view/homeFragmrnt.java
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+=======
+>>>>>>> e4301a092cde0713e9388c22188b231657edf1a8:app/src/main/java/com/technocracy/nit/raipur/kleos/aavartan/nitrr/treasurehunt/game/techfest/brainstorming/coms/kleos/questions/view/QuestionFragment.java
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.R;
+<<<<<<< HEAD:app/src/main/java/com/technocracy/nit/raipur/kleos/aavartan/nitrr/treasurehunt/game/techfest/brainstorming/coms/kleos/home/view/homeFragmrnt.java
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.SharedPrefs;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.RetrofitHomeTabsProvider;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.data.TabDetails;
@@ -27,18 +28,20 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+=======
+>>>>>>> e4301a092cde0713e9388c22188b231657edf1a8:app/src/main/java/com/technocracy/nit/raipur/kleos/aavartan/nitrr/treasurehunt/game/techfest/brainstorming/coms/kleos/questions/view/QuestionFragment.java
 
 import static android.R.id.list;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link homeFragmrnt.OnFragmentInteractionListener} interface
+ * {@link QuestionFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link homeFragmrnt#newInstance} factory method to
+ * Use the {@link QuestionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class homeFragmrnt extends Fragment implements HomeView {
+public class QuestionFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -48,6 +51,7 @@ public class homeFragmrnt extends Fragment implements HomeView {
     private String mParam1;
     private String mParam2;
 
+<<<<<<< HEAD:app/src/main/java/com/technocracy/nit/raipur/kleos/aavartan/nitrr/treasurehunt/game/techfest/brainstorming/coms/kleos/home/view/homeFragmrnt.java
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -68,9 +72,11 @@ public class homeFragmrnt extends Fragment implements HomeView {
 
 
 
+=======
+>>>>>>> e4301a092cde0713e9388c22188b231657edf1a8:app/src/main/java/com/technocracy/nit/raipur/kleos/aavartan/nitrr/treasurehunt/game/techfest/brainstorming/coms/kleos/questions/view/QuestionFragment.java
     private OnFragmentInteractionListener mListener;
 
-    public homeFragmrnt() {
+    public QuestionFragment() {
         // Required empty public constructor
     }
 
@@ -80,11 +86,11 @@ public class homeFragmrnt extends Fragment implements HomeView {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment homeFragmrnt.
+     * @return A new instance of fragment QuestionFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static homeFragmrnt newInstance(String param1, String param2) {
-        homeFragmrnt fragment = new homeFragmrnt();
+    public static QuestionFragment newInstance(String param1, String param2) {
+        QuestionFragment fragment = new QuestionFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -105,6 +111,7 @@ public class homeFragmrnt extends Fragment implements HomeView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+<<<<<<< HEAD:app/src/main/java/com/technocracy/nit/raipur/kleos/aavartan/nitrr/treasurehunt/game/techfest/brainstorming/coms/kleos/home/view/homeFragmrnt.java
         View view=inflater.inflate(R.layout.fragment_home_fragmrnt, container, false);
         ButterKnife.bind(this,view);
 
@@ -124,6 +131,9 @@ public class homeFragmrnt extends Fragment implements HomeView {
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     return view;
+=======
+        return inflater.inflate(R.layout.fragment_question, container, false);
+>>>>>>> e4301a092cde0713e9388c22188b231657edf1a8:app/src/main/java/com/technocracy/nit/raipur/kleos/aavartan/nitrr/treasurehunt/game/techfest/brainstorming/coms/kleos/questions/view/QuestionFragment.java
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -133,6 +143,7 @@ public class homeFragmrnt extends Fragment implements HomeView {
         }
     }
 
+<<<<<<< HEAD:app/src/main/java/com/technocracy/nit/raipur/kleos/aavartan/nitrr/treasurehunt/game/techfest/brainstorming/coms/kleos/home/view/homeFragmrnt.java
 
     @Override
     public void setTabs(TabsData tabsData) {
@@ -190,10 +201,17 @@ public class homeFragmrnt extends Fragment implements HomeView {
 
 
 
+=======
+>>>>>>> e4301a092cde0713e9388c22188b231657edf1a8:app/src/main/java/com/technocracy/nit/raipur/kleos/aavartan/nitrr/treasurehunt/game/techfest/brainstorming/coms/kleos/questions/view/QuestionFragment.java
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
 
     @Override

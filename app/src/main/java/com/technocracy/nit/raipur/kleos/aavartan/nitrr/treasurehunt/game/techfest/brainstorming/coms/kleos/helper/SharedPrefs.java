@@ -1,7 +1,9 @@
 package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper;
 
 import android.content.Context;
+import android.content.Loader;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 /**
  * Created by aman on 30/08/17.
@@ -13,16 +15,14 @@ public class SharedPrefs {
     private static final String PREF_NAME_LOGIN = "Login";
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
 
-    private static final String KEY_USERNAME = "username";
     private static final String KEY_FCM = "fcm";
     private static final String KEY_ACCESS_TOKEN = "access_token";
-    private static final String KEY_USER_LANGUAGE = "lang_type";
     private static final int KEY_VERSION = 1;
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
     private static final String PROFILE_IMAGE = "profile_image";
+    private static final String NAME= "name";
     private static final String MOBILE= "mobile";
     private static final String EMAIL= "email";
-    private static final String WARD= "ward";
 
     // LogCat tag
     private static String TAG = "Shared Preference";
@@ -57,20 +57,6 @@ public class SharedPrefs {
         return KEY_VERSION;
     }
 
-    public String getUsername() {
-        return pref.getString(KEY_USERNAME, "Name");
-    }
-
-    public void setUsername(String username) {
-
-        editor.putString(KEY_USERNAME, username);
-        editor.commit();
-
-
-    }
-
-
-
     public String getAccessToken() {
 
         return pref.getString(KEY_ACCESS_TOKEN, "1");
@@ -81,14 +67,6 @@ public class SharedPrefs {
         editor.commit();
     }
 
-    public int getUserLanguage() {
-        return pref.getInt(KEY_USER_LANGUAGE, 0);
-    }
-
-    public void setUserLanguage(int userLanguage) {
-        editor.putInt(KEY_USER_LANGUAGE, userLanguage);
-        editor.commit();
-    }
 
     public boolean isFirstTimeLaunch() {
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
@@ -124,9 +102,6 @@ public class SharedPrefs {
         return EMAIL;
     }
 
-    public String getWard() {
-        return WARD;
-    }
     public void setMobile(String mobile) {
         editor.putString(MOBILE, mobile);
         editor.commit();
@@ -134,8 +109,16 @@ public class SharedPrefs {
     public void setEmail(String email) {
         editor.putString(MOBILE, email);
         editor.commit();
-    }    public void setWard(String ward) {
-        editor.putString(MOBILE, ward);
+    }
+
+    public String getName() {
+        return NAME;
+    }
+
+    public void setName(String name) {
+        Log.d("SharedPrefs","Name "+name);
+        editor.putString(NAME, name);
         editor.commit();
     }
+
 }

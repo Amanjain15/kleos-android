@@ -8,5 +8,5 @@ import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfes
 
 public interface HomeCallBack {
     void onSuccess(TabsData tabsData);
-    void onFailure();
+    void onFailure(String error);
 }
