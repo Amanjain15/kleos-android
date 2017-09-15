@@ -51,15 +51,20 @@ public class MyFirebaseService extends FirebaseMessagingService {
 
         }
         imageUri = remoteMessage.getData().get("image");
-        if(imageUri.isEmpty()){
-            sendNotification(remoteMessage);
+        try{
+            if(imageUri.isEmpty()){
+                sendNotification(remoteMessage);
+            }
+            else
+            {
+                imageUri=Urls.BASE_URL+ Urls.SUB_NOTIFICATION_IMAGES+imageUri;
+                bitmap=getBitmapfromUrl(imageUri);
+                Log.d("image is:",imageUri);
+                sendImageNotification(remoteMessage,bitmap);
+            }
         }
-        else
-        {
-            imageUri=Urls.BASE_URL+ Urls.SUB_NOTIFICATION_IMAGES+imageUri;
-            bitmap=getBitmapfromUrl(imageUri);
-            Log.d("image is:",imageUri);
-            sendImageNotification(remoteMessage,bitmap);
+        catch(NullPointerException e){
+
         }
     }
 

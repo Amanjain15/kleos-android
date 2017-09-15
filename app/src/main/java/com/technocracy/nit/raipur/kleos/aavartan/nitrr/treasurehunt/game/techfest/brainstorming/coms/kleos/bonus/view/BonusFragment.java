@@ -164,6 +164,7 @@ public class BonusFragment extends Fragment implements BonusView{
         if (questionData.isAnswered()){
             answer.setVisibility(View.GONE);
             submit.setVisibility(View.GONE);
+            textView.setVisibility(View.VISIBLE);
             textView.setText("You Have Answered this Question");
         }
 
@@ -186,6 +187,7 @@ public class BonusFragment extends Fragment implements BonusView{
     @Override
     public void onRightAnswer() {
         Toaster.showShortMessage(context, "Right Answer");
+        questionPresenter.requestQuestion(sharedPrefs.getAccessToken());
     }
 
     /**

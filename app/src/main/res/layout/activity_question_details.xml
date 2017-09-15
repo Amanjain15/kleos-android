@@ -59,6 +59,9 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_medium"
                 android:textColor="@color/colorPrimaryDark"
+                android:text="@string/questions"
+                android:padding="@dimen/padding_large"
+                android:layout_marginTop="@dimen/margin_extra_small"
                 />
 
             <android.support.design.widget.TextInputLayout

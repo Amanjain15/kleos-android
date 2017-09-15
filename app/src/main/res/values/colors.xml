@@ -7,7 +7,7 @@
     <color name="blueGreen">#119da4</color>
     <color name="bone">#e3d3bd</color>
     <color name="gainsboro">#d1e1e8</color>
-
+    <color name="green">#00FF00</color>
     <!--Profile-->
     <color name ="profileImageBackground">#e3d3bd</color>
     <color name ="profileDetailsBackground">#d1e1e8</color>
