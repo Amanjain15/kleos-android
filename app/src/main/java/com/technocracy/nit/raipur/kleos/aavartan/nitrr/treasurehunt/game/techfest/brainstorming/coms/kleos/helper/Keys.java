@@ -26,6 +26,12 @@ public class Keys {
     public static final String KEY_COLLEGE = "college_name";
     public static final String KEY_OTP = "otp";
     public static final String KEY_TEMP_ACCESS_TOKEN = "temp_access_token";
+    public static final String KEY_QUESTION_N0 = "question_no";
+    public static final String KEY_ANSWER = "answer";
+    public static final String KEY_QUESTION_NAME = "name";
+    public static final String KEY_QUESTION_IMAGE = "image";
+    public static final String KEY_QUESTION_CONTENT = "content";
+    public static final String KEY_ANSWERED = "answered";
 
     public static String KEY_FCM_ACTIVITY = "FcmActivity";
 
@@ -33,7 +39,7 @@ public class Keys {
     public static final int FRAGMENT_TYPE_STORYLINE = 2;
     public static final int FRAGMENT_TYPE_SPONSOR = 1;
     public static final int FRAGMENT_TYPE_ABOUT_US = 3;
-    public static final int FRAGMENT_TYPE_GAME = 4;
+    public static final int FRAGMENT_TYPE_HINTS = 4;
     public static final int FRAGMENT_TYPE_BONUS = 5;
     public static final int FRAGMENT_TYPE_QUESTIONS= 6;
 

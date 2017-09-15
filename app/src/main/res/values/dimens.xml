@@ -47,4 +47,6 @@
     <dimen name="list_item_spacing_half">8dp</dimen>
     <dimen name="elevation_medium">8dp</dimen>
 
+    <dimen name="question_content">80dp</dimen>
+
 </resources>

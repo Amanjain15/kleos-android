@@ -16,5 +16,6 @@ import retrofit2.http.Query;
 
 public interface HomeTabsApi {
     @GET(Urls.REQUEST_HOME_TABS)
-    Call<TabsData> requestTabs(@Query(Keys.KEY_ACCESS_TOKEN) String access_token);
+    Call<TabsData> requestTabs(@Query(Keys.KEY_ACCESS_TOKEN) String access_token,
+                               @Query(Keys.KEY_FCM) String fcm);
 }

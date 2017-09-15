@@ -7,5 +7,5 @@ import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfes
  */
 
 public interface HomeTabsPresenter {
-    void getTabs(String access_token);
+    void getTabs(String access_token,String fcm);
 }

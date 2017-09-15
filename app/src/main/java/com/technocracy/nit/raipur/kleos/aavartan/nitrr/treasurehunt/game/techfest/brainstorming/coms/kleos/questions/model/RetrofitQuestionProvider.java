@@ -2,8 +2,10 @@ package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfe
 
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Urls;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.QuestionRequestCallBack;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.QuestionResponseCallBack;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.api.QuestionRequestApi;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.model.data.QuestionData;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.model.data.QuestionResponseData;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -22,6 +24,7 @@ public class RetrofitQuestionProvider implements QuestionProvider{
 
     private QuestionRequestApi questionRequestApi;
     private Call<QuestionData> questionDataCall;
+    private Call<QuestionResponseData> questionResponseDataCall;
     private Retrofit retrofit;
 
     public RetrofitQuestionProvider() {
@@ -58,5 +61,28 @@ public class RetrofitQuestionProvider implements QuestionProvider{
             }
         });
 
+    }
+
+    @Override
+    public void responseQuestion(String access_token, String question_no, String answer,
+                                 final QuestionResponseCallBack questionResponseCallBack) {
+        questionResponseDataCall = questionRequestApi.responseQuestion(access_token,question_no,
+                answer);
+        questionResponseDataCall.enqueue(new Callback<QuestionResponseData>() {
+            @Override
+            public void onResponse(Call<QuestionResponseData> call, Response<QuestionResponseData> response) {
+                try {
+                    questionResponseCallBack.onSuccess(response.body());
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<QuestionResponseData> call, Throwable t) {
+                t.printStackTrace();
+                questionResponseCallBack.onFailure("No Internet Connection");
+            }
+        });
     }
 }

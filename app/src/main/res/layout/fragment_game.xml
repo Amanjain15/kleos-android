@@ -1,13 +1,29 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.game.view.GameFragment">
+    tools:context="com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.hints.view.HintsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <RelativeLayout
+        android:id="@+id/recycler_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="game" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/solved_heading"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/hint_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <ProgressBar
+            android:id="@+id/ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
 
-</FrameLayout>
+</RelativeLayout>

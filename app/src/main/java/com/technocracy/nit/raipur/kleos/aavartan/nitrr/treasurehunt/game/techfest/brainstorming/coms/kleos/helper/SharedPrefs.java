@@ -78,10 +78,11 @@ public class SharedPrefs {
         editor.commit();
     }
 
-    public static String getKeyFcm() {
+    public String getKeyFcm() {
         return KEY_FCM;
     }
-    public void setFcm(String fcm){editor.putString(KEY_FCM, fcm);
+    public void setFcm(String fcm){
+        editor.putString(KEY_FCM, fcm);
         editor.commit();
 
     }

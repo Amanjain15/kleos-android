@@ -17,7 +17,7 @@ public class MockHomeProvider implements HomeTabsProvider {
     private TabsData mockTabData;
 
     @Override
-    public void getTabs(String access_token, final HomeCallBack homeCallBack) {
+    public void getTabs(String access_token,String fcm, final HomeCallBack homeCallBack) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

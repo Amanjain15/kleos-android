@@ -7,4 +7,5 @@ package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfe
 public interface QuestionPresenter {
 
     void requestQuestion(String access_token);
+    void responseQuestion(String access_token, String question_no, String answer);
 }

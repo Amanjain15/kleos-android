@@ -8,5 +8,5 @@ import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfes
 
 public interface HomeTabsProvider {
 
-    void getTabs(String access_token, HomeCallBack homeCallBack);
+    void getTabs(String access_token,String fcm, HomeCallBack homeCallBack);
 }

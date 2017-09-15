@@ -20,9 +20,9 @@ public class HomeTabsPresenterImpl implements HomeTabsPresenter {
     }
 
     @Override
-    public void getTabs(String access_token) {
+    public void getTabs(String access_token,String fcm) {
         homeView.showLoading(true);
-        homeTabsProvider.getTabs(access_token, new HomeCallBack() {
+        homeTabsProvider.getTabs(access_token,fcm, new HomeCallBack() {
             @Override
             public void onSuccess(TabsData tabsData) {
                 try {

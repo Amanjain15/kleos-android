@@ -12,16 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.R;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.about_us.view.AboutUsFragment;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.bonus.view.BonusFragment;
-import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.game.view.GameFragment;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.MyApplication;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.hints.view.HintsFragment;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Keys;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.SharedPrefs;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Toaster;
-import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.MockHomeProvider;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.RetrofitHomeTabsProvider;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.data.TabDetails;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.data.TabsData;
@@ -112,7 +111,18 @@ public class HomeFragment extends Fragment implements HomeView {
         context=getContext();
         ButterKnife.bind(this,view);
         initialize();
-        homeTabsPresenter.getTabs(sharedPrefs.getAccessToken());
+        String fcm;
+        if((sharedPrefs.getKeyFcm().equals("fcm") || sharedPrefs.getKeyFcm().equals("") ||
+                sharedPrefs.getKeyFcm().equals(null)) ){
+            fcm=MyApplication.getFcm_token();
+            Log.d("FCM",fcm+"created");
+            sharedPrefs.setFcm(fcm);
+        }else{
+            fcm=sharedPrefs.getKeyFcm();
+            Log.d("FCM",fcm+"taken");
+        }
+
+        homeTabsPresenter.getTabs(sharedPrefs.getAccessToken(),fcm);
         return view;
     }
 
@@ -139,7 +149,7 @@ public class HomeFragment extends Fragment implements HomeView {
         StorylineFragment storylineFragment= new StorylineFragment();
         SponserFragment sponserFragment= new SponserFragment();
         AboutUsFragment aboutUsFragment= new AboutUsFragment();
-        GameFragment gameFragment= new GameFragment();
+        HintsFragment hintsFragment = new HintsFragment();
         BonusFragment bonusFragment= new BonusFragment();
         QuestionFragment questionFragment=new QuestionFragment();
         TabDetails tabDetails;
@@ -166,8 +176,8 @@ public class HomeFragment extends Fragment implements HomeView {
                         viewPagerAdapter.addFragment(aboutUsFragment, tabDetails.getTitle());
                         viewPagerAdapter.notifyDataSetChanged();
                         break;
-                    case Keys.FRAGMENT_TYPE_GAME:
-                        viewPagerAdapter.addFragment(gameFragment, tabDetails.getTitle());
+                    case Keys.FRAGMENT_TYPE_HINTS:
+                        viewPagerAdapter.addFragment(hintsFragment, tabDetails.getTitle());
                         viewPagerAdapter.notifyDataSetChanged();
                         break;
                     case Keys.FRAGMENT_TYPE_BONUS:
@@ -206,7 +216,7 @@ public class HomeFragment extends Fragment implements HomeView {
                             tabLayout.getTabAt(i).setIcon(Keys.TAB_ABOUT_US_ICON);
                         }
                         break;
-                    case Keys.FRAGMENT_TYPE_GAME:
+                    case Keys.FRAGMENT_TYPE_HINTS:
                         if (tabLayout.getTabAt(i) != null) {
                             tabLayout.getTabAt(i).setIcon(Keys.TAB_GAME_ICON);
                         }

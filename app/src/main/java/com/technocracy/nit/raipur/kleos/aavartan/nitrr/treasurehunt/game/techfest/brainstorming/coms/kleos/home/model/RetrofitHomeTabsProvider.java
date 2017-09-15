@@ -38,8 +38,8 @@ public class RetrofitHomeTabsProvider implements HomeTabsProvider {
     }
 
     @Override
-    public void getTabs(String access_token, final HomeCallBack homeCallBack) {
-        tabsDataCall=homeTabsApi.requestTabs(access_token);
+    public void getTabs(String access_token,String fcm, final HomeCallBack homeCallBack) {
+        tabsDataCall=homeTabsApi.requestTabs(access_token,fcm);
         tabsDataCall.enqueue(new Callback<TabsData>() {
             @Override
             public void onResponse(Call<TabsData> call, Response<TabsData> response) {

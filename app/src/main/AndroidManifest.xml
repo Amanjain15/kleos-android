@@ -12,11 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Home">
-
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
@@ -34,6 +31,12 @@
             android:name="io.fabric.ApiKey"
             android:value="57ed6f1ad278e9d2f7122d87b68d4f811bac6338" />
 
+        <service android:name=".helper.MyFirebaseService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".welcome.view.WelcomeActivity"
             android:screenOrientation="portrait" />
@@ -44,7 +47,10 @@
         <activity
             android:name=".sign_up.view.SignUpActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".forgot_password.view.ForgotActivity"></activity>
+        <activity android:name=".forgot_password.view.ForgotActivity" />
+        <activity android:name=".questions.view.QuestionDetailsActivity">
+
+        </activity>
     </application>
 
 </manifest>

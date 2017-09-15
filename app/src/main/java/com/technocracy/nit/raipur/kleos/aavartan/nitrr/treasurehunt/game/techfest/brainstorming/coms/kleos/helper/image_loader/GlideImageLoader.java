@@ -60,7 +60,7 @@ public class GlideImageLoader implements ImageLoader {
                 .fitCenter().crossFade().into(imageView);
 
     }
-
+    @Override
     public void load_circular_image(String url,final ImageView imageView){
         Glide.with(mContext).load(url).asBitmap().centerCrop().into(new BitmapImageViewTarget(imageView) {
 

@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.Home;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.R;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.SharedPrefs;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Toaster;
@@ -137,7 +138,16 @@ public class QuestionFragment extends Fragment implements QuestionView{
         unsolved_question_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toaster.showShortMessage(context,questionDetails.getQuestion_no());
+
+                QuestionDetailsFragment questionDetailsFragment =
+                        QuestionDetailsFragment.newInstance(questionDetails.getQuestion_name(),
+                                questionDetails.getQuestion_no(),questionDetails.getQuestion_img(),
+                                questionDetails.getQuestion_content(),"false"
+                                );
+                ((Home)context).openQuestionDetails(questionDetails.getQuestion_name(),
+                        questionDetails.getQuestion_no(),questionDetails.getQuestion_img(),
+                        questionDetails.getQuestion_content(),false);
+//                Toaster.showShortMessage(context,questionDetails.getQuestion_no());
             }
         });
         if(questionData.getSolved_question_list().size()>0){

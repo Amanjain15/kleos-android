@@ -7,6 +7,7 @@ package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfe
 public class Urls {
 
 
+//	public static final String BASE_URL = "http://18.220.64.65:7999/";
 	public static final String BASE_URL = "http://192.168.43.19:8000/";
 	public static final String REQUEST_SPLASH_SCREEN = "splash_screen/";
 	public static final String REQUEST_WELCOME = "welcome/";
@@ -26,4 +27,6 @@ public class Urls {
 	public static final String REQUEST_PROFILE = "profile/";
 	public static final String REQUEST_STORY = "story/";
     public static final String REQUEST_QUESTION = "question_list/";
+	public static final String REQUEST_BONUS="bonus/";
+	public static final String REQUEST_HINTS="hints/";
 }

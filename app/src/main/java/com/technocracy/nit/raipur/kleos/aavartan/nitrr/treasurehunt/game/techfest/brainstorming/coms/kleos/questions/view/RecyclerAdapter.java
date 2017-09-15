@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.Home;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.R;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Toaster;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.image_loader.GlideImageLoader;
@@ -60,6 +61,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             public void onClick(View view) {
                 Log.d("QuestionRecyclerAdapter",questionDetails.getQuestion_no());
                 Toaster.showShortMessage(context,questionDetails.getQuestion_no());
+                ((Home)context).openQuestionDetails(questionDetails.getQuestion_name(),
+                        questionDetails.getQuestion_no(),questionDetails.getQuestion_img(),
+                        questionDetails.getQuestion_content(),true);
             }
         });
     }

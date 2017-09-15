@@ -26,5 +26,6 @@
     <string name="save">Save</string>
     <string name="solved_questions">Solved Questions</string>
     <string name="questions">Questions</string>
+    <string name="answer">Answer</string>
 
 </resources>
