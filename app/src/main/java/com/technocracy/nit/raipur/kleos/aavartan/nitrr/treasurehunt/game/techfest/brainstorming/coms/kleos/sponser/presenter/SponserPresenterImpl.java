@@ -24,7 +24,7 @@ public class SponserPresenterImpl implements SponserPresenter {
         sponserProvider.sponsers(access_token, new SponserCallBack() {
             @Override
             public void onSuccess(SponserData sponserData) {
-                if(sponserData.isSucccess())
+                if(sponserData.isSuccess())
                 {
                     sponserView.showLoading(false);
                     sponserView.setSponsers(sponserData);

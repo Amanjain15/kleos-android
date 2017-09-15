@@ -2,6 +2,9 @@ package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfe
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+
+import android.support.v4.app.FragmentPagerAdapter;
+
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
@@ -11,6 +14,7 @@ import java.util.List;
 /**
  * Created by aman on 6/9/17.
  */
+
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter{
     private final List<Fragment> fragmentList = new ArrayList<>();
@@ -40,4 +44,5 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter{
     public CharSequence getPageTitle(int position) {
         return null;
     }
+
 }

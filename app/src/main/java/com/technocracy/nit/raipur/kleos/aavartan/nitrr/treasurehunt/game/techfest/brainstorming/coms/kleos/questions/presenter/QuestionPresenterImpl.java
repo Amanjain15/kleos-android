@@ -45,7 +45,10 @@ public class QuestionPresenterImpl implements  QuestionPresenter {
                     }
                 }catch (NullPointerException e){
                     e.printStackTrace();
-                    questionView.showMessage("Success Null");
+                    if (questionData.getMessage().equals("All Questions Solved")){
+                        questionView.fullStack(questionData);
+                        questionView.showMessage(questionData.getMessage());
+                    }
                     questionView.showLoading(false);
                 }
             }

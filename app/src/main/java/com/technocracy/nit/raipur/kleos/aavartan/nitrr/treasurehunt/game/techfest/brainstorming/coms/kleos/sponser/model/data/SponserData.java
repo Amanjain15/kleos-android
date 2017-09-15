@@ -1,41 +1,31 @@
 package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.model.data;
 
+import java.util.List;
+
 /**
  * Created by aman on 6/9/17.
  */
 
 public class SponserData {
-    boolean succcess;
-    String message;
-    SponserDetails sponserDetails;
+    private boolean success;
+    private String message;
+    private List<SponserDetails> sponserDetails;
 
-    public SponserData(boolean succcess, String message, SponserDetails sponserDetails) {
-        this.succcess = succcess;
+    public SponserData(boolean success, String message, List<SponserDetails> sponserDetails) {
+        this.success = success;
         this.message = message;
         this.sponserDetails = sponserDetails;
     }
 
-    public boolean isSucccess() {
-        return succcess;
-    }
-
-    public void setSucccess(boolean succcess) {
-        this.succcess = succcess;
+    public boolean isSuccess() {
+        return success;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public SponserDetails getSponserDetails() {
+    public List<SponserDetails> getSponserDetails() {
         return sponserDetails;
-    }
-
-    public void setSponserDetails(SponserDetails sponserDetails) {
-        this.sponserDetails = sponserDetails;
     }
 }

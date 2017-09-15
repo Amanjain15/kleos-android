@@ -3,9 +3,15 @@ package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfe
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +19,25 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.Home;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.R;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.SharedPrefs;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.RetrofitHomeTabsProvider;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.data.TabDetails;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.data.TabsData;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.presenter.HomeTabsPresenter;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.presenter.HomeTabsPresenterImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.SharedPrefs;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Toaster;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.view.ViewPagerAdapter;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.model.RetrofitQuestionProvider;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.model.data.QuestionData;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.model.data.QuestionDetails;
@@ -26,6 +46,7 @@ import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfes
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,8 +86,6 @@ public class QuestionFragment extends Fragment implements QuestionView{
     RecyclerView question_recycler;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
-
-
 
     private OnFragmentInteractionListener mListener;
 
@@ -111,6 +130,7 @@ public class QuestionFragment extends Fragment implements QuestionView{
         question_recycler.setLayoutManager(new LinearLayoutManager(context));
         question_recycler.setHasFixedSize(true);
         question_recycler.setAdapter(recyclerAdapter);
+
     }
 
     public void onButtonPressed(Uri uri) {
@@ -118,6 +138,7 @@ public class QuestionFragment extends Fragment implements QuestionView{
             mListener.onFragmentInteraction(uri);
         }
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -170,6 +191,17 @@ public class QuestionFragment extends Fragment implements QuestionView{
     @Override
     public void showMessage(String message) {
         Toaster.showShortMessage(context,message);
+    }
+
+    @Override
+    public void fullStack(QuestionData questionData) {
+        unsolved_question_layout.setVisibility(View.GONE);
+        if(questionData.getSolved_question_list().size()>0){
+            solved_heading.setVisibility(View.VISIBLE);
+            recycler_layout.setVisibility(View.VISIBLE);
+            recyclerAdapter.setData(questionData.getSolved_question_list());
+            recyclerAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

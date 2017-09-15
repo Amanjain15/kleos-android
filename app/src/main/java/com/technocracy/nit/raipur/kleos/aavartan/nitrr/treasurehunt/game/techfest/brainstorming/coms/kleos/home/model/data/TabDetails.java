@@ -10,6 +10,7 @@ public class TabDetails {
     private int id;
 
     public TabDetails(String title,  int id) {
+
         this.title = title;
 
         this.id = id;

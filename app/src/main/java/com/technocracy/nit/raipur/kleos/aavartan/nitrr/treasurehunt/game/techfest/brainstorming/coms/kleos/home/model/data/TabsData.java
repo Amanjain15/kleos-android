@@ -7,6 +7,7 @@ import java.util.List;
  */
 
 public class TabsData {
+
     private boolean success;
     private String message;
     private List<TabDetails> tab_list;
@@ -24,6 +25,7 @@ public class TabsData {
     public String getMessage() {
         return message;
     }
+
 
     public List<TabDetails> getTab_list() {
         return tab_list;

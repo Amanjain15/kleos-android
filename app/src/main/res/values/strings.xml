@@ -9,6 +9,7 @@
     <string name="mobile">Mobile</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot Password</string>
+
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="already_have_a_account">Already have an account ? Login!</string>
@@ -27,5 +28,6 @@
     <string name="solved_questions">Solved Questions</string>
     <string name="questions">Questions</string>
     <string name="answer">Answer</string>
+
 
 </resources>

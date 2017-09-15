@@ -11,6 +11,7 @@ public interface QuestionView {
     void setData(QuestionData questionData);
     void showLoading(boolean show);
     void showMessage(String message);
+    void fullStack(QuestionData questionData);
     void enableSave(boolean save);
 
     void onEdit();

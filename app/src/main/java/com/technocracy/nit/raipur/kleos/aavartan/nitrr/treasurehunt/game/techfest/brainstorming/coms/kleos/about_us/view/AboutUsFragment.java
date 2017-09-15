@@ -4,11 +4,22 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.R;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.about_us.model.RetrofitAboutUsProvider;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.about_us.model.data.AboutUsData;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.about_us.presenter.AboutUsPresenter;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.about_us.presenter.AboutUsPresenterImpl;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.SharedPrefs;
+
+import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +29,7 @@ import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfes
  * Use the {@link AboutUsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AboutUsFragment extends Fragment {
+public class AboutUsFragment extends Fragment implements AboutUsView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,7 +39,18 @@ public class AboutUsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private SharedPrefs sharedPrefs;
+    private AboutUsPresenter aboutUsPresenter;
+    private Context context;
+
+    @BindView(R.id.about_us)
+    TextView ab;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
     private OnFragmentInteractionListener mListener;
+
+
 
     public AboutUsFragment() {
         // Required empty public constructor
@@ -65,7 +87,14 @@ public class AboutUsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about_us, container, false);
+        View view= inflater.inflate(R.layout.fragment_about_us, container, false);
+        initialize();
+        return view;
+    }
+
+    private void initialize() {
+        sharedPrefs = new SharedPrefs(getContext());
+        aboutUsPresenter = new AboutUsPresenterImpl(new RetrofitAboutUsProvider(),this);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -85,6 +114,28 @@ public class AboutUsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+
+    @Override
+    public void showLoading(boolean show) {
+        if (show) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+
+            progressBar.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void setData(AboutUsData aboutUsData) {
+        ab.setText(Html.fromHtml(aboutUsData.getText()));
     }
 
     /**

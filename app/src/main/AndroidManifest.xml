@@ -30,7 +30,6 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="57ed6f1ad278e9d2f7122d87b68d4f811bac6338" />
-
         <service android:name=".helper.MyFirebaseService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -47,6 +46,7 @@
         <activity
             android:name=".sign_up.view.SignUpActivity"
             android:screenOrientation="portrait" />
+
         <activity android:name=".forgot_password.view.ForgotActivity" />
         <activity android:name=".questions.view.QuestionDetailsActivity">
 
