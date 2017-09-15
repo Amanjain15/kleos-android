@@ -34,15 +34,7 @@
             android:name="io.fabric.ApiKey"
             android:value="57ed6f1ad278e9d2f7122d87b68d4f811bac6338" />
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <activity android:name=".home.homeActivity" />
-        <activity android:name=".home.view.homeActivity"></activity>
-=======
-        <activity android:name=".welcome.view.WelcomeActivity" />
-        <activity android:name=".login.view.LoginActivity"></activity>
->>>>>>> 6318cf2c16feb0cb7169b568cf39f8241ffb3594
-=======
+
         <activity
             android:name=".welcome.view.WelcomeActivity"
             android:screenOrientation="portrait" />
@@ -54,7 +46,7 @@
             android:name=".sign_up.view.SignUpActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".forgot_password.view.ForgotActivity"></activity>
->>>>>>> e4301a092cde0713e9388c22188b231657edf1a8
+
     </application>
 
 </manifest>

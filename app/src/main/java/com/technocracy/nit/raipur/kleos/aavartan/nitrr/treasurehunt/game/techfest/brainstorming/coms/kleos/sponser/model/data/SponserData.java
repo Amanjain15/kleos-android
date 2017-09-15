@@ -1,5 +1,7 @@
 package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.model.data;
 
+import java.util.List;
+
 /**
  * Created by aman on 6/9/17.
  */
@@ -7,9 +9,9 @@ package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfe
 public class SponserData {
     boolean succcess;
     String message;
-    SponserDetails sponserDetails;
+    List<SponserDetails> sponserDetails;
 
-    public SponserData(boolean succcess, String message, SponserDetails sponserDetails) {
+    public SponserData(boolean succcess, String message, List<SponserDetails> sponserDetails) {
         this.succcess = succcess;
         this.message = message;
         this.sponserDetails = sponserDetails;
@@ -19,23 +21,11 @@ public class SponserData {
         return succcess;
     }
 
-    public void setSucccess(boolean succcess) {
-        this.succcess = succcess;
-    }
-
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public SponserDetails getSponserDetails() {
+    public List<SponserDetails> getSponserDetails() {
         return sponserDetails;
-    }
-
-    public void setSponserDetails(SponserDetails sponserDetails) {
-        this.sponserDetails = sponserDetails;
     }
 }

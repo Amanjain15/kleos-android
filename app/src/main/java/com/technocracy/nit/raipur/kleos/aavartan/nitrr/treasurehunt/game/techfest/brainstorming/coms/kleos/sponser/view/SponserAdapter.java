@@ -40,7 +40,6 @@ public class SponserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ImageLoader imageLoader;
 
     public SponserAdapter( Context context, SponserFragment sponserFragment) {
-
         this.layoutInflater = LayoutInflater.from(context);
         this.context = context;
         this.sponserFragment = sponserFragment;
@@ -61,14 +60,14 @@ public void setSpons(List<SponserDetails>sponserDetailses)
         sponserDetails = sponserDetailsList.get(position);
         ViewHolder1 viewHolder = (ViewHolder1) holder;
         viewHolder.name.setText(sponserDetails.getName());
-        imageLoader.loadImage(sponserDetails.getImage_url(), viewHolder.image, viewHolder.image_progress_bar);
+     //  imageLoader.loadImage(sponserDetails.getImage_url(), viewHolder.image, viewHolder.image_progress_bar);
+        imageLoader.load_circular_image(sponserDetails.getImage_url(),viewHolder.image);
 
-
-
-        Glide.with(context)
-                .load(sponserDetails.getImage_url())
-                .bitmapTransform(new CropCircleTransformation(this))
-                .into(viewHolder.image,viewHolder.image_progress_bar);
+//
+//        Glide.with(context)
+//                .load(sponserDetails.getImage_url())
+//                .bitmapTransform(new CropCircleTransformation(this))
+//                .into(viewHolder.image,viewHolder.image_progress_bar);
 
         viewHolder.image.setOnClickListener(new View.OnClickListener() {
             @Override

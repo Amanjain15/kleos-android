@@ -1,4 +1,4 @@
-package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.about_us.view;
+package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.view;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,34 +7,41 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.R;
-import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.about_us.model.data.AboutUsData;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.SharedPrefs;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.presenter.QuestionPresenter;
+
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link AboutUsFragment.OnFragmentInteractionListener} interface
+ * {@link QuestionDetailsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link AboutUsFragment#newInstance} factory method to
+ * Use the {@link QuestionDetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AboutUsFragment extends Fragment implements AboutUsView {
+public class QuestionDetailsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
+    private static final String ARG_NAME = "name";
+    private static final String ARG_NUMBER= "no";
+    private static final String ARG_IMAGE= "image";
+    private static final String ARG_CONTENT= "content";
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String name;
+    private String number;
+    private String image;
+    private String content;
+
+    private Context context;
+    private SharedPrefs sharedPrefs;
+    private QuestionPresenter questionPresenter;
 
     private OnFragmentInteractionListener mListener;
 
-
-
-    public AboutUsFragment() {
+    public QuestionDetailsFragment() {
         // Required empty public constructor
     }
 
@@ -44,14 +51,16 @@ public class AboutUsFragment extends Fragment implements AboutUsView {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AboutUsFragment.
+     * @return A new instance of fragment QuestionDetailsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AboutUsFragment newInstance(String param1, String param2) {
-        AboutUsFragment fragment = new AboutUsFragment();
+    public static QuestionDetailsFragment newInstance(String param1, String param2,String param3, String param4) {
+        QuestionDetailsFragment fragment = new QuestionDetailsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_NAME, param1);
+        args.putString(ARG_NUMBER, param2);
+        args.putString(ARG_IMAGE, param3);
+        args.putString(ARG_CONTENT, param4);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,8 +69,10 @@ public class AboutUsFragment extends Fragment implements AboutUsView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            name= getArguments().getString(ARG_NAME);
+            number = getArguments().getString(ARG_NUMBER);
+            image = getArguments().getString(ARG_IMAGE);
+            content = getArguments().getString(ARG_CONTENT);
         }
     }
 
@@ -69,8 +80,20 @@ public class AboutUsFragment extends Fragment implements AboutUsView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_about_us, container, false);
+        View view= inflater.inflate(R.layout.fragment_question_details, container, false);
+        ButterKnife.bind(this,view);
+
+        initialize();
+
+
         return view;
+
+    }
+
+    private void initialize() {
+        context=getContext();
+        sharedPrefs = new SharedPrefs(context);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -83,35 +106,12 @@ public class AboutUsFragment extends Fragment implements AboutUsView {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-
-    @Override
-    public void showLoading(boolean show) {
-        if (show) {
-            progressBar.setVisibility(View.VISIBLE);
-        } else {
-
-            progressBar.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    @Override
-    public void showMessage(String message) {
-        Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
-
-    }
-
-    @Override
-    public void setData(AboutUsData aboutUsData) {
-
     }
 
     /**

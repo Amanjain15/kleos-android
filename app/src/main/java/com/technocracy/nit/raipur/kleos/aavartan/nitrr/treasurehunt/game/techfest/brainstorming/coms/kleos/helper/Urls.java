@@ -25,5 +25,7 @@ public class Urls {
 	public static final String REQUEST_SPONSER = "sponsor/";
 	public static final String REQUEST_PROFILE = "profile/";
 	public static final String REQUEST_STORY = "story/";
-    public static final String REQUEST_QUESTION = "questions/";
+    public static final String REQUEST_QUESTION = "question_list/";
+	public static final String ABOUT_US = "about_us/";
+
 }

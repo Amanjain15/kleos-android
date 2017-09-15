@@ -4,16 +4,29 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.R;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.SharedPrefs;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.model.RetrofitSponserProvider;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.model.data.SponserData;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.model.data.SponserDetails;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.presenter.SponserPresenter;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.presenter.SponserPresenterImpl;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +48,20 @@ public class SponserFragment extends Fragment  implements SponserView{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    @BindView(R.id.progressBar_sponser)
+    ProgressBar progressBar;
+    @BindView(R.id.recycler_sponser)
+    RecyclerView recyclerView;
+
+    private SponserPresenter sponserPresenter;
+    private SharedPrefs sharedPrefs;
+
+    private SponserAdapter sponserAdapter;
+
+
+
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -78,6 +105,15 @@ public class SponserFragment extends Fragment  implements SponserView{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_sponser, container, false);
+        ButterKnife.bind(this,view);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        sponserAdapter = new SponserAdapter(getContext(), this);
+        recyclerView.setAdapter(sponserAdapter);
+        sharedPrefs = new SharedPrefs(getContext());
+        sponserPresenter = new SponserPresenterImpl( new RetrofitSponserProvider(),this);
+        sponserPresenter.sponsers(sharedPrefs.getAccessToken());
 
 
         return view ;
@@ -93,11 +129,19 @@ public class SponserFragment extends Fragment  implements SponserView{
 
     @Override
     public void setSponsers(SponserData sponserData) {
+        sponserAdapter.setSpons(sponserData.getSponserDetails());
+
 
     }
 
     @Override
     public void showLoading(boolean show) {
+        if (show) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+
+            progressBar.setVisibility(View.INVISIBLE);
+        }
 
     }
     public void onImageClick(SponserDetails sponserDetails)
@@ -105,7 +149,7 @@ public class SponserFragment extends Fragment  implements SponserView{
         Uri uri = Uri.parse(sponserDetails.getWeb_url());
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         builder.setToolbarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
-        builder.setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
+        builder.setSecondaryToolbarColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
 // set start and exit animations
         builder.setExitAnimations(getActivity(), android.R.anim.slide_in_left,
                 android.R.anim.slide_out_right);
