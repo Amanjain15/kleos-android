@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ import butterknife.ButterKnife;
  * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends Fragment implements ProfileRequestView {
+public class ProfileFragment extends Fragment implements ProfileRequestView,SwipeRefreshLayout.OnRefreshListener  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -85,6 +86,11 @@ public class ProfileFragment extends Fragment implements ProfileRequestView {
     @BindView(R.id.rank_text)
     TextView rank;
 
+    @BindView(R.id.rank)
+    TextView rankt;
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     private OnFragmentInteractionListener mListener;
 
     public ProfileFragment() {
@@ -125,6 +131,19 @@ public class ProfileFragment extends Fragment implements ProfileRequestView {
                 visibilityEditView(true);
             }
         });
+
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        swipeRefreshLayout.setRefreshing(true);
+                                        profilePresenter.requestProfile(sharedPrefs.getAccessToken());
+                                    }
+                                }
+        );
+        rankt.setVisibility(View.GONE);
+        rank.setVisibility(View.GONE);
+
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -195,8 +214,11 @@ public class ProfileFragment extends Fragment implements ProfileRequestView {
         edittextCollege.setText(profileRequestData.getCollege_name());
         edittextEmail.setText(profileRequestData.getEmail());
 
-        if (!(profileRequestData.getRank().equals("") || profileRequestData.getRank().equals(null)))
+        if (!(profileRequestData.getRank().equals("") || profileRequestData.getRank().equals(null)||
+                profileRequestData.getRank().equals("-1")
+        ))
         {
+            rankt.setVisibility(View.VISIBLE);
             rank.setVisibility(View.VISIBLE);
             rank.setText(profileRequestData.getRank());
         }
@@ -205,8 +227,10 @@ public class ProfileFragment extends Fragment implements ProfileRequestView {
     @Override
     public void showLoading(boolean show) {
         if (show) {
+            swipeRefreshLayout.setRefreshing(true);
             progressBar.setVisibility(View.VISIBLE);
         } else {
+            swipeRefreshLayout.setRefreshing(false);
             progressBar.setVisibility(View.GONE);
         }
     }
@@ -261,6 +285,11 @@ public class ProfileFragment extends Fragment implements ProfileRequestView {
             edittextEmail.setVisibility(View.GONE);
             edittextCollege.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        profilePresenter.requestProfile(sharedPrefs.getAccessToken());
     }
 
     public interface OnFragmentInteractionListener {

@@ -1,107 +1,118 @@
-<ScrollView
+<android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.view.QuestionFragment">
-    <RelativeLayout
+    android:background="@drawable/background"
+    >
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/padding_large"
-        >
-
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context="com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.view.QuestionFragment">
         <RelativeLayout
-            android:id="@+id/unsolved_question_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/padding_large"
             >
 
-            <LinearLayout
-                android:id="@+id/question_name_layout"
+            <RelativeLayout
+                android:id="@+id/unsolved_question_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/padding_small"
-                android:background="@drawable/two_end_curved_layout"
                 >
-                <TextView
-                    android:id="@+id/question_name"
+
+                <LinearLayout
+                    android:id="@+id/question_name_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size_medium"
-                    android:textColor="@color/white"
-                    />
-            </LinearLayout>
+                    android:padding="@dimen/padding_small"
+                    android:background="@drawable/profile_background"
+                    >
+                    <TextView
+                        android:id="@+id/question_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_medium"
+                        android:textColor="@color/white"
+                        />
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/question_content"
-                android:layout_below="@+id/question_name_layout"
-                android:padding="@dimen/padding_large"
-                android:background="@drawable/bluegreen_bordered_layout"
-                >
-                <TextView
-                    android:id="@+id/question_content"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/textSizeExtraSmall"
-                    android:maxLines="3"
-                    android:ellipsize="end"
+                    android:layout_height="@dimen/question_content"
+                    android:layout_below="@+id/question_name_layout"
+                    android:padding="@dimen/padding_small"
+                    android:background="@drawable/profile_background"
+                    >
+                    <TextView
+                        android:id="@+id/question_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="@dimen/textSizeExtraSmall"
+                        android:maxLines="3"
+                        android:ellipsize="end"
+                        android:background="@color/white"
+                        android:padding="@dimen/padding_large"
+                        />
+                </LinearLayout>
 
-                    />
-            </LinearLayout>
+            </RelativeLayout>
 
-        </RelativeLayout>
-
-        <View
-            android:id="@+id/separator"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_below="@+id/unsolved_question_layout"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_small"
-            android:background="@color/black_60_percent"
-            />
-
-        <TextView
-            android:id="@+id/solved_heading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/separator"
-            android:padding="@dimen/padding_large"
-            android:background="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_medium"
-            android:text="@string/solved_questions"
-            android:textColor="@color/white"
-            android:visibility="gone"
-            android:layout_marginBottom="@dimen/margin_very_small"
-            />
-
-        <RelativeLayout
-            android:id="@+id/recycler_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@+id/solved_heading"
-
-            android:visibility="gone"
-            >
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/question_recycler"
+            <View
+                android:id="@+id/separator"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:nestedScrollingEnabled="false"
-
+                android:layout_height="2dp"
+                android:layout_below="@+id/unsolved_question_layout"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:background="@color/black_60_percent"
                 />
+
+            <TextView
+                android:id="@+id/solved_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/separator"
+                android:padding="@dimen/padding_large"
+                android:background="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_medium"
+                android:text="@string/solved_questions"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/margin_very_small"
+                />
+
+            <RelativeLayout
+                android:id="@+id/recycler_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/solved_heading"
+
+                android:visibility="gone"
+                >
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/question_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="false"
+
+                    />
+            </RelativeLayout>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                />
+
         </RelativeLayout>
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            />
-
-    </RelativeLayout>
-
-</ScrollView>
+    </ScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>

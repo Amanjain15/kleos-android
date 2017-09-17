@@ -8,7 +8,9 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/black_percent"
+        >
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -16,6 +18,10 @@
             android:layout_height="wrap_content"
             android:titleTextColor="@color/white"
             app:titleTextColor="@color/white"
+            android:elevation="12dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:background="@color/colorPrimary"
             />
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
@@ -24,10 +30,11 @@
             android:layout_gravity="center"
             android:background="@color/colorPrimaryDark"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/colorAccent"
+            app:tabIndicatorColor="@color/white"
             app:tabIndicatorHeight="4dp"
             app:tabMaxWidth="0dp"
             app:tabMode="fixed"
+            android:elevation="12dp"
             />
     </android.support.design.widget.AppBarLayout>
 

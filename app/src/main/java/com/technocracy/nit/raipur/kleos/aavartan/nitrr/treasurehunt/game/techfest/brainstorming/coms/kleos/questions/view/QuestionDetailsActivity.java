@@ -1,12 +1,15 @@
 package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -26,7 +29,7 @@ import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfes
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class QuestionDetailsActivity extends AppCompatActivity implements QuestionResponseView {
+public class QuestionDetailsActivity extends AppCompatActivity implements QuestionResponseView  {
 
     private String name;
     private String number;
@@ -55,6 +58,8 @@ public class QuestionDetailsActivity extends AppCompatActivity implements Questi
     ProgressBar progressBar;
     @BindView(R.id.submit)
     ImageView submit;
+    private int a=1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +74,18 @@ public class QuestionDetailsActivity extends AppCompatActivity implements Questi
             answered=bundle.getBoolean(Keys.KEY_ANSWERED);
             Log.d("QuestionDetailsActivty",answered+" "+bundle.getBoolean(Keys.KEY_ANSWERED));
         }
+        if (a==1){
+
+            hideKeyboard();
+            a=0;
+        }
+        a=0;
+        answer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                answer.setFocusable(true);
+            }
+        });
         toolbar.setTitle(name);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,14 +94,28 @@ public class QuestionDetailsActivity extends AppCompatActivity implements Questi
             }
         });
         initialize();
+        final Context context = this;
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ImageViewerActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(Keys.KEY_QUESTION_NAME, name);
+                bundle.putString(Keys.KEY_QUESTION_IMAGE, image);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         question_content.setText(content);
         if(answered){
             submit.setVisibility(View.GONE);
             answer.setVisibility(View.GONE);
         }
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hideKeyboard();
                 String answer1= answer.getText().toString();
                 if (answer1.equals("")||answer1.equals(null)){
                     answer.setError("Please Fill Answer");
@@ -124,8 +155,17 @@ public class QuestionDetailsActivity extends AppCompatActivity implements Questi
         }
     }
 
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
     @Override
     public void showMessage(String message) {
         Toaster.showShortMessage(context,message);
     }
+
 }

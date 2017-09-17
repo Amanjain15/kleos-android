@@ -1,9 +1,11 @@
 package com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.bonus.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +20,13 @@ import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfes
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.bonus.model.data.QuestionData;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.bonus.presenter.BonusPresenter;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.bonus.presenter.BonusPresenterImpl;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Keys;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.SharedPrefs;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Toaster;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.image_loader.GlideImageLoader;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.image_loader.ImageLoader;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.bonus.model.data.QuestionDetails;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.view.ImageViewerActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +39,7 @@ import butterknife.ButterKnife;
  * Use the {@link BonusFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BonusFragment extends Fragment implements BonusView{
+public class BonusFragment extends Fragment implements BonusView,SwipeRefreshLayout.OnRefreshListener  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -69,6 +73,9 @@ public class BonusFragment extends Fragment implements BonusView{
 
     @BindView(R.id.text)
     TextView textView;
+
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -127,6 +134,17 @@ public class BonusFragment extends Fragment implements BonusView{
                 }
             }
         });
+
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        swipeRefreshLayout.setRefreshing(true);
+                                        questionPresenter.requestQuestion(sharedPrefs.getAccessToken());
+                                    }
+                                }
+        );
+
         return view;
 
     }
@@ -157,9 +175,21 @@ public class BonusFragment extends Fragment implements BonusView{
     }
 
     @Override
-    public void setData(QuestionData questionData) {
-        QuestionDetails questionDetails= questionData.getBonus_question();
+    public void setData(final QuestionData questionData) {
+        final QuestionDetails questionDetails= questionData.getBonus_question();
         imageLoader.loadImage(questionDetails.getQuestion_img(),imageView,imageProgressBar);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ImageViewerActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(Keys.KEY_QUESTION_NAME, questionDetails.getQuestion_name());
+                bundle.putString(Keys.KEY_QUESTION_IMAGE, questionDetails.getQuestion_img());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         question_content.setText(questionDetails.getQuestion_content());
         if (questionData.isAnswered()){
             answer.setVisibility(View.GONE);
@@ -172,9 +202,11 @@ public class BonusFragment extends Fragment implements BonusView{
 
     @Override
     public void showLoading(boolean show) {
-        if (show){
+        if (show) {
+            swipeRefreshLayout.setRefreshing(true);
             progressBar.setVisibility(View.VISIBLE);
-        }else{
+        } else {
+            swipeRefreshLayout.setRefreshing(false);
             progressBar.setVisibility(View.GONE);
         }
     }
@@ -188,6 +220,12 @@ public class BonusFragment extends Fragment implements BonusView{
     public void onRightAnswer() {
         Toaster.showShortMessage(context, "Right Answer");
         questionPresenter.requestQuestion(sharedPrefs.getAccessToken());
+    }
+
+    @Override
+    public void onRefresh() {
+        questionPresenter.requestQuestion(sharedPrefs.getAccessToken());
+
     }
 
     /**

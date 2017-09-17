@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
         forgot_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toaster.showShortMessage(loginActivity,"Yet to be Made");
+//                Toaster.showShortMessage(loginActivity,"Yet to be Made");
                 Intent i = new Intent(LoginActivity.this, ForgotActivity.class);
                 startActivity(i);
             }

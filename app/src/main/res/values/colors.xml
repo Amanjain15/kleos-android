@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2f0202</color>
-    <color name="colorPrimaryDark">#270202</color>
-    <color name="colorAccent">#0c7489</color>
+    <color name="colorPrimary">#03398e</color>
+    <color name="colorPrimaryDark">#1f0069</color>
+    <color name="colorAccent">#1e5493</color>
 
-    <color name="blueGreen">#119da4</color>
+    <color name="blueGreen">#55a3f4</color>
     <color name="bone">#e3d3bd</color>
-    <color name="gainsboro">#d1e1e8</color>
-    <color name="green">#00FF00</color>
+    <color name="gainsboro">#75b8fb</color>
+    <color name="platinum">#e6e6e6</color>
     <!--Profile-->
-    <color name ="profileImageBackground">#e3d3bd</color>
+    <color name ="profileImageBackground">#b6b6b6</color>
     <color name ="profileDetailsBackground">#d1e1e8</color>
 
+    <color name ="tabBackground">#1f0069</color>
     <!--Black color shades-->
     <color name="black_100_percent">#ff000000</color>
     <color name="black_90_percent">#e6000000</color>

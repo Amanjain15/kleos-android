@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue1"
+    tools:context="com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.view.SponsorActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#10393f"
+            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+            app:titleTextColor="@color/white"
+                        />
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/imageLayout"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="190dp"
+        android:layout_margin="60dp"
+        android:paddingTop="@dimen/padding_very_large"
+        android:paddingBottom="@dimen/padding_very_large"
+        >
+
+        <ProgressBar
+            android:id="@+id/imageProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/image_hd"
+            android:layout_height="@dimen/image_hd"
+            android:src="@drawable/ic_logo"
+            android:layout_centerInParent="true"
+            android:adjustViewBounds="true"
+            />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_below="@+id/imageLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_small"
+        >
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_very_large"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Sponsor"
+            />
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_below="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/text_size_medium"
+            android:textColor="@color/white"
+            android:layout_marginTop="95dp"
+            />
+    </RelativeLayout>
+    
+    <Button
+        android:id="@+id/web_url"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="#10393f"
+        android:layout_margin="@dimen/margin_extra_small"
+        android:textSize="@dimen/textSizeSmall"
+        android:textStyle="bold"
+        android:text="Visit Sponsor's Website"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textColor="@color/white"
+        />
+
+
+</RelativeLayout>

@@ -47,7 +47,7 @@ public class QuestionPresenterImpl implements  QuestionPresenter {
                     e.printStackTrace();
                     if (questionData.getMessage().equals("All Questions Solved")){
                         questionView.fullStack(questionData);
-                        questionView.showMessage(questionData.getMessage());
+//                        questionView.showMessage(questionData.getMessage());
                     }
                     questionView.showLoading(false);
                 }

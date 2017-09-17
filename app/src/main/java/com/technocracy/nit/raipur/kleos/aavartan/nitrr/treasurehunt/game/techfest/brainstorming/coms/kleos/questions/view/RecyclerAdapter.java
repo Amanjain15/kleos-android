@@ -60,7 +60,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             @Override
             public void onClick(View view) {
                 Log.d("QuestionRecyclerAdapter",questionDetails.getQuestion_no());
-                Toaster.showShortMessage(context,questionDetails.getQuestion_no());
+//                Toaster.showShortMessage(context,questionDetails.getQuestion_no());
                 ((Home)context).openQuestionDetails(questionDetails.getQuestion_name(),
                         questionDetails.getQuestion_no(),questionDetails.getQuestion_img(),
                         questionDetails.getQuestion_content(),true);

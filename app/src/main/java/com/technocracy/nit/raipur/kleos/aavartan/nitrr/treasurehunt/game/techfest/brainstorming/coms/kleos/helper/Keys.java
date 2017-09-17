@@ -33,6 +33,12 @@ public class Keys {
     public static final String KEY_QUESTION_CONTENT = "content";
     public static final String KEY_ANSWERED = "answered";
 
+    public static final String KEY_SPONSOR_NAME = "name";
+    public static final String KEY_SPONSOR_IMAGE = "image";
+    public static final String KEY_SPONSOR_CONTENT = "content";
+    public static final String KEY_SPONSOR_WEB_URL= "web_url";
+
+
     public static String KEY_FCM_ACTIVITY = "FcmActivity";
 
     public static final int FRAGMENT_TYPE_PROFILE = 0;

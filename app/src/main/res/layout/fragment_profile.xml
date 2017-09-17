@@ -1,248 +1,271 @@
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.profile.view.ProfileFragment"
-    android:background="@color/profileDetailsBackground"
-
-    >
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/profileImageBackground"
     >
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/padding_very_large"
-        android:layout_marginTop="100dp"
-        android:background="@color/profileDetailsBackground"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.profile.view.ProfileFragment"
+
         >
         <RelativeLayout
-            android:id="@+id/nameLayout"
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_extra_small"
-            android:padding="@dimen/padding_large"
-            >
-            <TextView
-                android:id="@+id/name_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/app_name"
-                android:textSize="@dimen/text_size_large"
-                />
-
-            <EditText
-                android:id="@+id/name_edittext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_centerHorizontal="true"
-                android:text="@string/hint_name"
-                android:textSize="@dimen/text_size_medium"
-                android:gravity="center"
-                />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/phoneLayout">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_phone_accent_24dp"
-                android:layout_gravity="center"
-                />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                >
-                <TextView
-                    android:id="@+id/phone_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:layout_gravity="center"
-                    android:textSize="@dimen/textSizeSmall"
-                    />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/emailLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:background="@drawable/profile_background"
             >
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_email_accent_24dp"
-                android:layout_gravity="center"
-                />
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_very_large"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/background"
                 >
-                <TextView
+                <RelativeLayout
+                    android:id="@+id/nameLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:layout_gravity="center"
-                    android:textSize="@dimen/textSizeSmall"
-                    android:id="@+id/email_textview"/>
-
-                <EditText
-                    android:id="@+id/email_edittext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/email"
-                    android:textSize="@dimen/textSizeSmall"
-                    android:inputType="textEmailAddress"
-                    android:layout_gravity="center_vertical"
-                    android:visibility="gone"
-                    />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/collegeLayout">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_college_accent_24dp"
-                android:layout_gravity="center"
-                />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                >
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:layout_gravity="center"
-                    android:textSize="@dimen/textSizeSmall"
-                    android:id="@+id/college_textview"
-                    />
-
-                    <AutoCompleteTextView
-                        android:id="@+id/college_edittext"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_extra_small"
+                    android:padding="@dimen/padding_large"
+                    >
+                    <TextView
+                        android:id="@+id/name_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        android:hint="@string/college"
-                        android:inputType="textCapCharacters"
-                        android:textSize="@dimen/textSizeSmall"
-                        android:visibility="gone"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/app_name"
+                        android:textSize="@dimen/text_size_large"
+                        android:textColor="@color/black"
                         />
 
+                    <EditText
+                        android:id="@+id/name_edittext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/hint_name"
+                        android:textSize="@dimen/text_size_medium"
+                        android:gravity="center"
+                        />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/phoneLayout">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_phone_accent_24dp"
+                        android:layout_gravity="center"
+                        />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        >
+                        <TextView
+                            android:id="@+id/phone_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:layout_gravity="center"
+                            android:textSize="@dimen/textSizeSmall"
+                            />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/emailLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_email_accent_24dp"
+                        android:layout_gravity="center"
+                        />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:layout_gravity="center"
+                            android:textSize="@dimen/textSizeSmall"
+                            android:id="@+id/email_textview"/>
+
+                        <EditText
+                            android:id="@+id/email_edittext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/email"
+                            android:textSize="@dimen/textSizeSmall"
+                            android:inputType="textEmailAddress"
+                            android:layout_gravity="center_vertical"
+                            android:visibility="gone"
+                            />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/collegeLayout">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_college_accent_24dp"
+                        android:layout_gravity="center"
+                        />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:layout_gravity="center"
+                            android:textSize="@dimen/textSizeSmall"
+                            android:id="@+id/college_textview"
+                            />
+
+                            <AutoCompleteTextView
+                                android:id="@+id/college_edittext"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif"
+                                android:hint="@string/college"
+                                android:inputType="textCapCharacters"
+                                android:textSize="@dimen/textSizeSmall"
+                                android:visibility="gone"
+                                />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginBottom="120dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/login_button_background"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_medium"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/edit"
+
+                    />
+
+                <Button
+                    android:id="@+id/save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/login_button_background"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_medium"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/save"
+                    android:visibility="gone"
+
+                    />
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_margin="40dp"
+                android:paddingTop="@dimen/padding_very_large"
+                android:paddingBottom="@dimen/padding_very_large"
+                android:background="@color/white"
+                >
+
+                <ProgressBar
+                    android:id="@+id/imageProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"
+                    />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="@dimen/image_big"
+                    android:layout_height="@dimen/image_big"
+                    android:src="@drawable/ic_logo"
+                    android:layout_centerInParent="true"
+                    android:adjustViewBounds="true"
+                    />
             </RelativeLayout>
-        </LinearLayout>
 
-        <Button
-            android:id="@+id/edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_small"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/login_button_background"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_medium"
-            android:fontFamily="sans-serif"
-            android:text="@string/edit"
+            <TextView
+                android:id="@+id/rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/text_size_medium"
+                android:text="RANK"
+                android:padding="@dimen/padding_large"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                />
 
-            />
+            <TextView
+                android:id="@+id/rank_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="16dp"
+                android:textSize="@dimen/text_size_medium"
+                android:text="0"
+                android:background="@drawable/rank_background"
+                android:padding="@dimen/padding_large"
+                android:visibility="gone"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                />
 
-        <Button
-            android:id="@+id/save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_small"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/login_button_background"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_medium"
-            android:fontFamily="sans-serif"
-            android:text="@string/save"
-            android:visibility="gone"
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                />
+        </RelativeLayout>
+    </ScrollView>
 
-            />
-
-    </LinearLayout>
-
-
-    <RelativeLayout
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_margin="40dp"
-        android:paddingTop="@dimen/padding_very_large"
-        android:paddingBottom="@dimen/padding_very_large"
-        android:background="@drawable/bordered_layout"
-        >
-
-        <ProgressBar
-            android:id="@+id/imageProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone"
-            />
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="@dimen/image_big"
-            android:layout_height="@dimen/image_big"
-            android:src="@drawable/ic_logo"
-            android:layout_centerInParent="true"
-            android:adjustViewBounds="true"
-            />
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/rank_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="@dimen/text_size_medium"
-        android:text="0"
-        android:background="@drawable/rank_background"
-        android:padding="@dimen/padding_large"
-        android:visibility="gone"
-        />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        />
-
-
-</RelativeLayout>
-</ScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -68,19 +69,22 @@ public class SponserAdapter extends RecyclerView.Adapter<SponserAdapter.ViewHold
         sponserDetails = sponserDetailsList.get(position);
         holder.name.setText(sponserDetails.getName());
      //  imageLoader.loadImage(sponserDetails.getImage_url(), viewHolder.image, viewHolder.image_progress_bar);
-        imageLoader.load_circular_image(sponserDetails.getImage_url(),holder.image);
+        imageLoader.loadImage(sponserDetails.getImage_url(),holder.image,holder.image_progress_bar);
         Log.d("Sponsor",sponserDetails.getName()+" "+sponserDetails.getImage_url());
 //
 //        Glide.with(context)
 //                .load(sponserDetails.getImage_url())
 //                .bitmapTransform(new CropCircleTransformation(this))
 //                .into(viewHolder.image,viewHolder.image_progress_bar);
-        holder.image.setOnClickListener(new View.OnClickListener() {
+        holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                ((Home)context).onImageClick(sponserDetails);
-                sponserFragment.onImageClick(sponserDetails);
+                ((Home)context).openSponsorDetails(
+                        sponserDetails.getName(),
+                        sponserDetails.getImage_url(),
+                        sponserDetails.getContent(),
+                        sponserDetails.getWeb_url()
+                        );
             }
         });
     }
@@ -97,6 +101,9 @@ public class SponserAdapter extends RecyclerView.Adapter<SponserAdapter.ViewHold
         ProgressBar image_progress_bar;
         @BindView(R.id.spons_name)
         TextView name;
+        @BindView(R.id.detailsLayout)
+        RelativeLayout layout;
+
 
         public ViewHolder1(View itemView) {
             super(itemView);

@@ -8,6 +8,7 @@ import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -45,7 +46,7 @@ import butterknife.ButterKnife;
 
 
 
-public class SponserFragment extends Fragment  implements SponserView{
+public class SponserFragment extends Fragment  implements SponserView,SwipeRefreshLayout.OnRefreshListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -55,6 +56,9 @@ public class SponserFragment extends Fragment  implements SponserView{
     ProgressBar progressBar;
     @BindView(R.id.recycler_sponser)
     RecyclerView recyclerView;
+
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private SponserPresenter sponserPresenter;
     private SharedPrefs sharedPrefs;
@@ -111,6 +115,15 @@ public class SponserFragment extends Fragment  implements SponserView{
         fragmentActivity=getActivity();
         initialize();
         sponserPresenter.sponsers(sharedPrefs.getAccessToken());
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        swipeRefreshLayout.setRefreshing(true);
+                                        sponserPresenter.sponsers(sharedPrefs.getAccessToken());
+                                    }
+                                }
+        );
         return view ;
     }
 
@@ -142,10 +155,11 @@ public class SponserFragment extends Fragment  implements SponserView{
     @Override
     public void showLoading(boolean show) {
         if (show) {
+            swipeRefreshLayout.setRefreshing(true);
             progressBar.setVisibility(View.VISIBLE);
         } else {
-
-            progressBar.setVisibility(View.INVISIBLE);
+            swipeRefreshLayout.setRefreshing(false);
+            progressBar.setVisibility(View.GONE);
         }
 
     }
@@ -179,6 +193,11 @@ public class SponserFragment extends Fragment  implements SponserView{
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onRefresh() {
+        sponserPresenter.sponsers(sharedPrefs.getAccessToken());
     }
 
     /**

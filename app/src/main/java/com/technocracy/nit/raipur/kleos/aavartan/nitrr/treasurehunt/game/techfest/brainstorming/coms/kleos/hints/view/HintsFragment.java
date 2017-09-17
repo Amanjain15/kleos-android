@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,7 +31,7 @@ import butterknife.ButterKnife;
  * Use the {@link HintsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HintsFragment extends Fragment implements HintsView{
+public class HintsFragment extends Fragment implements HintsView,SwipeRefreshLayout.OnRefreshListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -49,6 +50,9 @@ public class HintsFragment extends Fragment implements HintsView{
 
     @BindView(R.id.ProgressBar)
     ProgressBar progressBar;
+
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private OnFragmentInteractionListener mListener;
 
@@ -91,6 +95,15 @@ public class HintsFragment extends Fragment implements HintsView{
         ButterKnife.bind(this,view);
         intialize();
         hintsPresenter.requestHints(sharedPrefs.getAccessToken());
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        swipeRefreshLayout.setRefreshing(true);
+                                        hintsPresenter.requestHints(sharedPrefs.getAccessToken());
+                                    }
+                                }
+        );
         return view;
     }
 
@@ -130,9 +143,11 @@ public class HintsFragment extends Fragment implements HintsView{
 
     @Override
     public void showLoading(boolean show) {
-        if (show){
+        if (show) {
+            swipeRefreshLayout.setRefreshing(true);
             progressBar.setVisibility(View.VISIBLE);
-        }else{
+        } else {
+            swipeRefreshLayout.setRefreshing(false);
             progressBar.setVisibility(View.GONE);
         }
     }
@@ -140,6 +155,11 @@ public class HintsFragment extends Fragment implements HintsView{
     @Override
     public void showMessage(String message) {
         Toaster.showShortMessage(context,message);
+    }
+
+    @Override
+    public void onRefresh() {
+        hintsPresenter.requestHints(sharedPrefs.getAccessToken());
     }
 
     /**

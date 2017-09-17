@@ -38,7 +38,7 @@ public class GlideImageLoader implements ImageLoader {
     public void loadImage(String url, final ImageView imageView, final ProgressBar progressBar) {
         Log.d("Response",url);
         url = url.replace("\"", "");
-
+        progressBar.setVisibility(View.VISIBLE);
 //
 //        requestManager.load(url).crossFade().thumbnail(0.1f);
 //        requestManager.load(url).crossFade().thumbnail(0.05f);

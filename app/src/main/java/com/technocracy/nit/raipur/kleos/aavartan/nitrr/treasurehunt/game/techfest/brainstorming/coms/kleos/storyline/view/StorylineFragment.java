@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,7 @@ import butterknife.ButterKnife;
  * Use the {@link StorylineFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StorylineFragment extends Fragment implements  StoryLineView{
+public class StorylineFragment extends Fragment implements  StoryLineView,SwipeRefreshLayout.OnRefreshListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -62,6 +63,9 @@ public class StorylineFragment extends Fragment implements  StoryLineView{
     ImageView imageView;
     @BindView(R.id.imageProgressBar)
     ProgressBar imageProgressBar;
+
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private OnFragmentInteractionListener mListener;
 
@@ -105,6 +109,15 @@ public class StorylineFragment extends Fragment implements  StoryLineView{
         context=getContext();
         initialize();
         storyLinePresenter.requestStory(sharedPreferences.getAccessToken());
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        swipeRefreshLayout.setRefreshing(true);
+                                        storyLinePresenter.requestStory(sharedPreferences.getAccessToken());
+                                    }
+                                }
+        );
         return  view;
     }
 
@@ -145,8 +158,10 @@ public class StorylineFragment extends Fragment implements  StoryLineView{
     @Override
     public void showLoading(boolean show) {
         if (show) {
+            swipeRefreshLayout.setRefreshing(true);
             progressBar.setVisibility(View.VISIBLE);
         } else {
+            swipeRefreshLayout.setRefreshing(false);
             progressBar.setVisibility(View.GONE);
         }
     }
@@ -154,6 +169,11 @@ public class StorylineFragment extends Fragment implements  StoryLineView{
     @Override
     public void showMessage(String message) {
         Toaster.showShortMessage(context,message);
+    }
+
+    @Override
+    public void onRefresh() {
+        storyLinePresenter.requestStory(sharedPreferences.getAccessToken());
     }
 
     public interface OnFragmentInteractionListener {

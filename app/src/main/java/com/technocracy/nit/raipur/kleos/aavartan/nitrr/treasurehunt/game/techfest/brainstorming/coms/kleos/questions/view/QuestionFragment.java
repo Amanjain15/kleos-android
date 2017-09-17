@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v7.widget.LinearLayoutManager;
@@ -56,7 +57,7 @@ import butterknife.ButterKnife;
  * Use the {@link QuestionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QuestionFragment extends Fragment implements QuestionView{
+public class QuestionFragment extends Fragment implements QuestionView,SwipeRefreshLayout.OnRefreshListener {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -86,6 +87,12 @@ public class QuestionFragment extends Fragment implements QuestionView{
     RecyclerView question_recycler;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.separator)
+    View separator;
+
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -119,6 +126,15 @@ public class QuestionFragment extends Fragment implements QuestionView{
         ButterKnife.bind(this,view);
         initialize();
         questionPresenter.requestQuestion(sharedPrefs.getAccessToken());
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    swipeRefreshLayout.setRefreshing(true);
+                    questionPresenter.requestQuestion(sharedPrefs.getAccessToken());
+                }
+            }
+        );
         return  view;
     }
 
@@ -182,8 +198,10 @@ public class QuestionFragment extends Fragment implements QuestionView{
     @Override
     public void showLoading(boolean show) {
         if (show){
+            swipeRefreshLayout.setRefreshing(true);
             progressBar.setVisibility(View.VISIBLE);
         }else{
+            swipeRefreshLayout.setRefreshing(false);
             progressBar.setVisibility(View.GONE);
         }
     }
@@ -197,6 +215,7 @@ public class QuestionFragment extends Fragment implements QuestionView{
     public void fullStack(QuestionData questionData) {
         unsolved_question_layout.setVisibility(View.GONE);
         if(questionData.getSolved_question_list().size()>0){
+            separator.setVisibility(View.GONE);
             solved_heading.setVisibility(View.VISIBLE);
             recycler_layout.setVisibility(View.VISIBLE);
             recyclerAdapter.setData(questionData.getSolved_question_list());
@@ -212,6 +231,11 @@ public class QuestionFragment extends Fragment implements QuestionView{
     @Override
     public void onEdit() {
 
+    }
+
+    @Override
+    public void onRefresh() {
+        questionPresenter.requestQuestion(sharedPrefs.getAccessToken());
     }
 
     public interface OnFragmentInteractionListener {

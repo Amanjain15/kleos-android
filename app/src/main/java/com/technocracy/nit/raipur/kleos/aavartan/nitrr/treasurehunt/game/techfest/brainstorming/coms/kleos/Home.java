@@ -15,6 +15,7 @@ import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfes
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.view.HomeFragment;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.view.QuestionDetailsActivity;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.model.data.SponserDetails;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.view.SponsorActivity;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -66,6 +67,19 @@ public class Home extends AppCompatActivity {
 
         startActivity(questionDetailsActivityIntent);
 
+    }
+
+    public void openSponsorDetails(String name, String image, String content,
+                                    String web_url) {
+        Intent sponsorDetailsActivityIntent = new Intent(this, SponsorActivity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Keys.KEY_SPONSOR_NAME, name);
+        bundle.putString(Keys.KEY_SPONSOR_IMAGE, image);
+        bundle.putString(Keys.KEY_SPONSOR_WEB_URL, web_url);
+        bundle.putString(Keys.KEY_SPONSOR_CONTENT, content);;
+        sponsorDetailsActivityIntent.putExtras(bundle);
+        startActivity(sponsorDetailsActivityIntent);
     }
 
     public void onImageClick(SponserDetails sponserDetails)
