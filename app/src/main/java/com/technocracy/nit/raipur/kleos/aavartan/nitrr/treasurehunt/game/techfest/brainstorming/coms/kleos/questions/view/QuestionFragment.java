@@ -119,6 +119,12 @@ public class QuestionFragment extends Fragment implements QuestionView,SwipeRefr
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        questionPresenter.requestQuestion(sharedPrefs.getAccessToken());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -176,11 +182,6 @@ public class QuestionFragment extends Fragment implements QuestionView,SwipeRefr
             @Override
             public void onClick(View view) {
 
-                QuestionDetailsFragment questionDetailsFragment =
-                        QuestionDetailsFragment.newInstance(questionDetails.getQuestion_name(),
-                                questionDetails.getQuestion_no(),questionDetails.getQuestion_img(),
-                                questionDetails.getQuestion_content(),"false"
-                                );
                 ((Home)context).openQuestionDetails(questionDetails.getQuestion_name(),
                         questionDetails.getQuestion_no(),questionDetails.getQuestion_img(),
                         questionDetails.getQuestion_content(),false);

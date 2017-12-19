@@ -8,6 +8,7 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <!--TextSizes-->
+    <dimen name="text_size_very_giant">35dp</dimen>
     <dimen name="text_size_very_large">30dp</dimen>
     <dimen name="text_size_large">24sp</dimen>
     <dimen name="text_size_big">20sp</dimen>

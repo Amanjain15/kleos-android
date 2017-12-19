@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfes
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.Keys;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.image_loader.GlideImageLoader;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.helper.image_loader.ImageLoader;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.view.ImageViewerActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,6 +56,7 @@ public class SponsorActivity extends AppCompatActivity {
             spons_content = bundle.getString(Keys.KEY_SPONSOR_CONTENT);
             spons_image=bundle.getString(Keys.KEY_QUESTION_IMAGE);
             spons_url=bundle.getString(Keys.KEY_SPONSOR_WEB_URL);
+
         }
         initialize();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -64,9 +67,21 @@ public class SponsorActivity extends AppCompatActivity {
         });
         toolbar.setTitle(spons_name);
         name.setText(spons_name);
-        content.setText(spons_content);
+        content.setText(Html.fromHtml(spons_content));
         imageLoader.loadImage(spons_image,imageView,imageProgressBar);
         context=this;
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ImageViewerActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(Keys.KEY_QUESTION_NAME, spons_name);
+                bundle.putString(Keys.KEY_QUESTION_IMAGE, spons_image);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
         web_url.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

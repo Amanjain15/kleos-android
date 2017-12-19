@@ -26,6 +26,7 @@ import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfes
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.model.data.TabsData;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.presenter.HomeTabsPresenter;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.home.presenter.HomeTabsPresenterImpl;
+import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.leaderboard.view.LeaderBoardFragment;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.profile.view.ProfileFragment;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.questions.view.QuestionFragment;
 import com.technocracy.nit.raipur.kleos.aavartan.nitrr.treasurehunt.game.techfest.brainstorming.coms.kleos.sponser.view.SponserFragment;
@@ -150,6 +151,7 @@ public class HomeFragment extends Fragment implements HomeView {
         SponserFragment sponserFragment= new SponserFragment();
         AboutUsFragment aboutUsFragment= new AboutUsFragment();
         HintsFragment hintsFragment = new HintsFragment();
+        LeaderBoardFragment leaderBoardFragment = new LeaderBoardFragment();
         BonusFragment bonusFragment= new BonusFragment();
         QuestionFragment questionFragment=new QuestionFragment();
         TabDetails tabDetails;
@@ -186,6 +188,10 @@ public class HomeFragment extends Fragment implements HomeView {
                         break;
                     case Keys.FRAGMENT_TYPE_QUESTIONS:
                         viewPagerAdapter.addFragment(questionFragment, tabDetails.getTitle());
+                        viewPagerAdapter.notifyDataSetChanged();
+                        break;
+                    case Keys.FRAGMENT_TYPE_LEADER_BOARD:
+                        viewPagerAdapter.addFragment(leaderBoardFragment, tabDetails.getTitle());
                         viewPagerAdapter.notifyDataSetChanged();
                         break;
                 }
@@ -229,6 +235,11 @@ public class HomeFragment extends Fragment implements HomeView {
                     case Keys.FRAGMENT_TYPE_QUESTIONS:
                         if (tabLayout.getTabAt(i) != null) {
                             tabLayout.getTabAt(i).setIcon(Keys.TAB_QUESTION_ICON);
+                        }
+                        break;
+                    case Keys.FRAGMENT_TYPE_LEADER_BOARD:
+                        if (tabLayout.getTabAt(i) != null) {
+                            tabLayout.getTabAt(i).setIcon(Keys.TAB_LEADER_BOARD_ICON);
                         }
                         break;
                 }

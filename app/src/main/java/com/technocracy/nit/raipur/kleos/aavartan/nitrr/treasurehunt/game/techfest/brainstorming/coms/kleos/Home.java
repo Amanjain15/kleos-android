@@ -55,8 +55,6 @@ public class Home extends AppCompatActivity {
     public void openQuestionDetails(String title, String number, String image,
                                 String content, boolean answered) {
         Intent questionDetailsActivityIntent = new Intent(this, QuestionDetailsActivity.class);
-
-
         Bundle bundle = new Bundle();
         bundle.putString(Keys.KEY_QUESTION_NAME, title);
         bundle.putString(Keys.KEY_QUESTION_IMAGE, image);
@@ -64,7 +62,6 @@ public class Home extends AppCompatActivity {
         bundle.putString(Keys.KEY_QUESTION_CONTENT, content);
         bundle.putBoolean(Keys.KEY_ANSWERED, answered);
         questionDetailsActivityIntent.putExtras(bundle);
-
         startActivity(questionDetailsActivityIntent);
 
     }

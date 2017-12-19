@@ -74,12 +74,7 @@ public class QuestionDetailsActivity extends AppCompatActivity implements Questi
             answered=bundle.getBoolean(Keys.KEY_ANSWERED);
             Log.d("QuestionDetailsActivty",answered+" "+bundle.getBoolean(Keys.KEY_ANSWERED));
         }
-        if (a==1){
 
-            hideKeyboard();
-            a=0;
-        }
-        a=0;
         answer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +115,7 @@ public class QuestionDetailsActivity extends AppCompatActivity implements Questi
                 if (answer1.equals("")||answer1.equals(null)){
                     answer.setError("Please Fill Answer");
                     answer.requestFocus();
-                }else{
+                }else {
                     questionPresenter.responseQuestion(sharedPrefs.getAccessToken(),number,answer1);
                 }
             }
@@ -166,6 +161,15 @@ public class QuestionDetailsActivity extends AppCompatActivity implements Questi
     @Override
     public void showMessage(String message) {
         Toaster.showShortMessage(context,message);
+    }
+
+    @Override
+    public void enableSubmit(boolean s) {
+        if (s){
+            submit.setEnabled(true);
+        }else{
+            submit.setEnabled(false);
+        }
     }
 
 }

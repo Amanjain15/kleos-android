@@ -65,21 +65,23 @@ public class SponserAdapter extends RecyclerView.Adapter<SponserAdapter.ViewHold
         return new ViewHolder1(view);
     }
     @Override
-    public void onBindViewHolder(ViewHolder1 holder, int position) {
+    public void onBindViewHolder(ViewHolder1 holder, final int position) {
         sponserDetails = sponserDetailsList.get(position);
         holder.name.setText(sponserDetails.getName());
      //  imageLoader.loadImage(sponserDetails.getImage_url(), viewHolder.image, viewHolder.image_progress_bar);
         imageLoader.loadImage(sponserDetails.getImage_url(),holder.image,holder.image_progress_bar);
-        Log.d("Sponsor",sponserDetails.getName()+" "+sponserDetails.getImage_url());
-//
-//        Glide.with(context)
-//                .load(sponserDetails.getImage_url())
-//                .bitmapTransform(new CropCircleTransformation(this))
-//                .into(viewHolder.image,viewHolder.image_progress_bar);
+        Log.d("Sponsor____",sponserDetails.getName()+" "+sponserDetails.getImage_url());
+
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("SponsorsRecycler",sponserDetails.getName()+" "+
+                        sponserDetails.getImage_url()+" "+
+                        sponserDetails.getContent()+" "+
+                        sponserDetails.getWeb_url()+" "+position);
+                SponserDetails sponserDetails = sponserDetailsList.get(position);
                 ((Home)context).openSponsorDetails(
+
                         sponserDetails.getName(),
                         sponserDetails.getImage_url(),
                         sponserDetails.getContent(),

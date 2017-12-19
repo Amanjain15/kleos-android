@@ -11,8 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Home">
-
+        <activity
+            android:name=".Home"
+            android:screenOrientation="portrait">
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
@@ -48,10 +49,19 @@
         <activity
             android:name=".sign_up.view.SignUpActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".forgot_password.view.ForgotActivity" />
-        <activity android:name=".questions.view.QuestionDetailsActivity" />
-        <activity android:name=".sponser.view.SponsorActivity" />
-        <activity android:name=".questions.view.ImageViewerActivity"></activity>
+        <activity android:name=".forgot_password.view.ForgotActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".questions.view.QuestionDetailsActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".sponser.view.SponsorActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".questions.view.ImageViewerActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

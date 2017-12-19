@@ -48,6 +48,7 @@ public class Keys {
     public static final int FRAGMENT_TYPE_HINTS = 4;
     public static final int FRAGMENT_TYPE_BONUS = 5;
     public static final int FRAGMENT_TYPE_QUESTIONS= 6;
+    public static final int FRAGMENT_TYPE_LEADER_BOARD= 7;
 
 
     public static final int TAB_PROFILE_ICON = R.drawable.ic_tab_profile;
@@ -57,5 +58,7 @@ public class Keys {
     public static final int TAB_GAME_ICON = R.drawable.ic_tab_game;
     public static final int TAB_BONUS_ICON = R.drawable.ic_tab_bonus;
     public static final int TAB_QUESTION_ICON = R.drawable.ic_questions;
+    public static final int TAB_LEADER_BOARD_ICON = R.drawable.ic_leader_board;
+
 
 }

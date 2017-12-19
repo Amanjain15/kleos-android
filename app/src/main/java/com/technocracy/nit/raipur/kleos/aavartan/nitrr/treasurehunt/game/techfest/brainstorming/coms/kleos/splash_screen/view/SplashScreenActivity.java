@@ -50,6 +50,9 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
     @BindView(R.id.logo)
     ImageView logo;
 
+    @BindView(R.id.logo_aavartan)
+    ImageView logo_aav;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
         ButterKnife.bind(this);
         initialise();
         Glide.with(this).load(R.drawable.ic_logo).into(logo);
+        Glide.with(this).load(R.drawable.aavartan_logo).into(logo_aav);
         splashScreenPresenter.requestSplash();
     }
 

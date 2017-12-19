@@ -63,6 +63,7 @@ public class QuestionPresenterImpl implements  QuestionPresenter {
 
     @Override
     public void responseQuestion(String access_token, String question_no, String answer) {
+        questionResponseView.enableSubmit(false);
         questionResponseView.showLoading(true);
         questionProvider.responseQuestion(access_token,question_no,answer,new QuestionResponseCallBack() {
             @Override
@@ -71,15 +72,18 @@ public class QuestionPresenterImpl implements  QuestionPresenter {
                     if (questionData.isSuccess()){
                         questionResponseView.showLoading(false);
                         questionResponseView.onRightAnswer();
+//                        questionResponseView.enableSubmit(false);
 
                     }else {
                         questionResponseView.showLoading(false);
                         questionResponseView.showMessage(questionData.getMessage());
+                        questionResponseView.enableSubmit(true);
                     }
                 }catch (NullPointerException e){
                     e.printStackTrace();
                     questionResponseView.showMessage("Success Null");
                     questionResponseView.showLoading(false);
+                    questionResponseView.enableSubmit(true);
                 }
             }
 
@@ -87,6 +91,7 @@ public class QuestionPresenterImpl implements  QuestionPresenter {
             public void onFailure(String s) {
                 questionResponseView.showLoading(false);
                 questionResponseView.showMessage(s);
+                questionResponseView.enableSubmit(true);
             }
         });
     }

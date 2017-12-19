@@ -32,4 +32,6 @@ public class Urls {
 
 	public static final String ABOUT_US = "about_us/";
 
+	public static final String REQUEST_LEADERBOARD = "leader_board/";
+
 }

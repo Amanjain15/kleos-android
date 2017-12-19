@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black_percent"
+        android:elevation="15dp"
         >
 
         <android.support.v7.widget.Toolbar
@@ -18,30 +19,30 @@
             android:layout_height="wrap_content"
             android:titleTextColor="@color/white"
             app:titleTextColor="@color/white"
-            android:elevation="12dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
             android:background="@color/colorPrimary"
             />
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/colorPrimaryDark"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/white"
-            app:tabIndicatorHeight="4dp"
-            app:tabMaxWidth="0dp"
-            app:tabMode="fixed"
-            android:elevation="12dp"
-            />
+
     </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_small"
+        android:layout_below="@id/appBarLayout"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimaryDark"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/white"
+        app:tabIndicatorHeight="4dp"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/appBarLayout"
+        android:layout_below="@id/tabLayout"
         >
         <android.support.v4.view.ViewPager
             android:layout_width="match_parent"

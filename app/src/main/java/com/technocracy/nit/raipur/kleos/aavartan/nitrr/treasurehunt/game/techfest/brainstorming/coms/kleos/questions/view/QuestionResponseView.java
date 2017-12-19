@@ -8,4 +8,5 @@ public interface QuestionResponseView {
     void onRightAnswer();
     void showLoading(boolean show);
     void showMessage(String message);
+    void enableSubmit(boolean s);
 }
